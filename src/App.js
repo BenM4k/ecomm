@@ -5,6 +5,7 @@ import { Home, ProductDetails, NotFound } from './routes';
 function App() {
   return (
     <>
+      <div className='hero-banner'></div>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

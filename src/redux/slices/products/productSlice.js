@@ -29,6 +29,13 @@ const initialState = [
         desc: 'iphone',
         price: 499,
     },
+    {
+        id: 4,
+        name: 'ProductFive',
+        image: 'prod4',
+        desc: 'samsung',
+        price: 599,
+    },
 ];
 
 const ProductSlice = createSlice({

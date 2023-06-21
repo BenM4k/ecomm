@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { AiOutlineShopping } from 'react-icons/ai';
-import { toggleLogin } from '../../redux/slices/products/productSlice';
+import { toggleLogin, toggleCart } from '../../redux/slices/products/productSlice';
 import './Navbar.scss';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const cart = useSelector((store) => store.product.cart);
   return (
     <header>
       <nav>
@@ -18,8 +19,8 @@ const Navbar = () => {
           <li>
             <NavLink to='/profile' className="profile">Profile</NavLink></li>
           <li onClick={() => dispatch(toggleLogin())}>Log in</li>
-          <li>
-              <span className='cart-number'>0</span>
+          <li onClick={() => dispatch(toggleCart())}>
+              <span className='cart-number'>{cart.length}</span>
             <AiOutlineShopping className='cart-logo' />
           </li>
         </ul>

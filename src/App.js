@@ -1,19 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
 
-import {Footer, Navbar} from './components';
-import { Home, ProductDetails, NotFound } from './routes';
+import {Footer, Navbar, Login } from './components';
+import { Home, ProductDetails, NotFound, User } from './routes';
 function App() {
   return (
     <>
-      <div className='hero-banner'></div>
       <Navbar />
+      <Login />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<ProductDetails />} />
+        <Route path='/profile/:name' element={<User />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
-      <div className="App"/>
     </>
   );
 }

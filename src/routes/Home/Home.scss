@@ -1,9 +1,69 @@
+.hero-banner {
+    padding: 0 2rem;
+    height: 60vh;
+    // background: gray;
+
+    .splide {
+        height: 100%;
+        width: 1080px;
+        margin: 0 auto;
+        padding-top: 1.5em;
+        overflow: hidden;
+        
+        .custom-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: #383023;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 1em;
+            overflow: hidden;
+    
+            .splide__slide {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                height: 100%;
+
+                .carousel-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    color: #fff;
+
+                    .carousel-body {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+
+                        .carousel-header {
+                            font-size: 3em;
+                        }
+    
+                        .carousel-text {
+                            width: 80%;
+                            letter-spacing: 1px;
+                        }
+                    }
+                }
+                img {
+                    width: 500px;
+                    height: 430px;
+                }
+            }
+        }
+    }
+}
+
 .main-container {
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 1080px;
     margin: auto;
+    padding-bottom: 5em;
 
     .product-list {
         display: flex;
@@ -11,12 +71,12 @@
         justify-content: space-evenly;
         flex-wrap: wrap;
         margin-top: 5em;
-        gap: 20px;
+        gap: 35px;
 
         .product {
-            height: 300px;
+            height: fit-content;
             width: 240px;
-            padding: 1rem 0;
+            padding: 1rem;
             list-style: none;
             background-color: rgba(255, 255, 255, 0.3);
             border: 2px solid rgba(255, 255, 255, 0.6);
@@ -28,7 +88,7 @@
             align-items: center;
             cursor: pointer;
 
-            box-shadow: 5px 16px 20px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 7px 20px 0 rgba(0, 0, 0, 0.2);
 
             &:hover {
                 background-color: rgba(255, 255, 255, 0.6);

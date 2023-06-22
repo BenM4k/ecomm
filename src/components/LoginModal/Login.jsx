@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 
-import { toggleLogin } from '../../redux/slices/products/productSlice';
+import { toggleLogin, toggleSignup } from '../../redux/slices/products/productSlice';
 import './Login.scss';
 
 const Login = () => {
@@ -19,10 +19,11 @@ const Login = () => {
     }
   }
   const dispatch = useDispatch();
-  const login = useSelector((store) => store.product.login);
+  const {login, signup } = useSelector((store) => store.product);
+
   return (
     <>
-        {login && <div className="login-wrapper">
+        {signup && <div className="login-wrapper">
             <motion.div 
                 className="login-container"
                 variants={modalVariant}
@@ -30,7 +31,50 @@ const Login = () => {
                 animate="end"
             >
                 <button
-                    onClick={() => dispatch(toggleLogin())}
+                    onClick={() =>{
+                        dispatch(toggleSignup());
+                    } }
+                    className='close-login'
+                >
+                    close
+                </button>
+                <h1>Sign in</h1>
+                <form className='login-form'>
+                    <label htmlFor="text">First Name</label>
+                    <input type="text" />
+                    <label htmlFor="text">Last name</label>
+                    <input type="text" />
+                    <label htmlFor="text">username</label>
+                    <input type="text" />
+                    <label htmlFor="password">password</label>
+                    <input type="password" />
+                    <button type="button" className='submit-login'>Submit</button>
+                    <div className="login-footer">
+                        <button
+                            className='forget'
+                            onClick={(e) => {
+                                e.preventDefault();
+                                dispatch(toggleLogin());
+                                dispatch(toggleSignup());
+                            } }
+                        >
+                            Or Log in
+                        </button>
+                    </div>
+                </form>
+            </motion.div>
+        </div>}
+        { login && <div className="login-wrapper">
+            <motion.div 
+                className="login-container"
+                variants={modalVariant}
+                initial="start"
+                animate="end"
+            >
+                <button
+                    onClick={() =>{
+                        dispatch(toggleLogin());
+                    } }
                     className='close-login'
                 >
                     close
@@ -41,9 +85,24 @@ const Login = () => {
                     <input type="text" />
                     <label htmlFor="password">password</label>
                     <input type="password" />
-                    <input type="checkbox" />
-                    <button type="button">Submit</button>
-                    <span>forget password</span>
+                    <div className="remember">
+                        <input type="checkbox" />
+                        <label htmlFor="checkbox">remember me</label>
+                    </div>
+                    <button type="button" className='submit-login'>Submit</button>
+                    <div className="login-footer">
+                        <button className='forget'>forget password</button>
+                        <button
+                            className='forget'
+                            onClick={(e) => {
+                                e.preventDefault();
+                                dispatch(toggleSignup());
+                                dispatch(toggleLogin());
+                            } }
+                        >
+                            Or Sign in
+                        </button>
+                    </div>
                 </form>
             </motion.div>
         </div>}

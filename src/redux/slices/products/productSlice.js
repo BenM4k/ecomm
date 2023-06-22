@@ -44,6 +44,7 @@ const initialState = {
         },
     ],
     login: false,
+    signup: false,
     cart: [],
     cartOpen: false,
 };
@@ -54,6 +55,9 @@ const ProductSlice = createSlice({
     reducers: {
         toggleLogin : (state) => {
             state.login = !state.login;
+        },
+        toggleSignup : (state) => {
+            state.signup = !state.signup;
         },
         toggleCart : (state) => {
             state.cartOpen = !state.cartOpen;
@@ -81,5 +85,5 @@ const ProductSlice = createSlice({
     },
 });
 
-export const { addToCart, toggleCart, toggleLogin, addCount, removeCount } = ProductSlice.actions;
+export const { addToCart, toggleCart, toggleLogin, toggleSignup, addCount, removeCount } = ProductSlice.actions;
 export default ProductSlice.reducer;

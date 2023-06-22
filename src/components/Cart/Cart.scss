@@ -7,11 +7,171 @@
     height: 100%;
 
     .cart-container {
-        background-color: #fff;
-        height: 100%;
-        width: 30%;
+        background-color: rgba(255, 255, 255, .9);
+        color: #2d210c;
+        border-radius: .4rem;
+        height: 96%;
+        width: 40%;
         position: fixed;
         right: 0;
         top: 0;
+        margin-top: 20px ;
+        margin-right: 10px;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+
+        .cart-head {
+            position: relative;
+            .cart-title {
+                text-align: center;
+                margin-bottom: 1em;
+            }
+
+            button {
+                position: absolute;
+                top: -9px;
+                right: 0;
+                width: 1em;
+                height: 1em;
+                text-indent: 10em;
+                overflow: hidden;
+                border: none;
+                background: none;
+                font-size: 2em;
+                cursor: pointer;
+
+                &::after {
+                    position: absolute;
+                    line-height: 0.5;
+                    top: 0.2em;
+                    left: 0.1em;
+                    text-indent: 0;
+                    content: "\00D7";
+                }
+            }
+
+            .first-cart-side {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: .2em;
+
+                &:nth-child(2) {
+                    flex: 2;
+                }
+            }
+        }
+        .cart-body {
+            flex: 2;
+            margin-top: .5em;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border-bottom: 2px solid #2d210c;
+            margin-bottom: 1em;
+
+            .cart-details {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                justify-content: space-between;
+                width: 100%;
+
+                &:nth-child(odd) {
+                    background-color: rgba(255, 255, 255, .9);
+                }
+
+                .second-cart-side {
+                    padding: .2em;
+                    width: 34%;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: 1px;
+                    color: #2d210c;
+                    img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+
+                .cart-details-price {
+                    margin-left: -7.8em;
+                }
+
+                .quantity {
+                    float: left;
+                    border: 1px solid #2d210c;
+                    border-radius: .19rem;
+                    display: flex;
+                    align-items: center;
+                    margin-right: 5px;
+
+                    span {
+                        font-size: 1.2em;
+                    }
+                    .count-plus {
+                        flex: 1;
+                        padding: .2em;
+                        border-right: 1px solid #2d210c;
+                        cursor: pointer;
+                    }
+                    .quant {
+                        flex: 2;
+                        padding: 0 .6rem;
+                    }
+                    .count-minus {
+                        flex: 1;
+                        padding: .2em;
+                        border-left: 1px solid #2d210c;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .cart-footer {
+            margin: auto;
+            width: 100%;
+            color: #2d210c;
+
+            .cart-footer-price {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1em;
+
+                p, span {
+                    font-weight: bold;
+                    text-transform: capitalize;
+                    letter-spacing: 1px;
+                    font-size: 1.2em;
+                }
+
+                span {
+                    color: green;
+                }
+            }
+
+            button {
+                float: right;
+                padding: .7rem 3.5rem;
+                border: 1px solid #2d210c;
+                border-radius: .19rem;
+                font-weight: 500;
+                background-color: transparent;
+                background-color: #2d210c;
+                color: #fff;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-weight: 500;
+                cursor: pointer;
+                outline: none;
+
+                &:active {
+                    opacity: 0.8;
+                }
+            }
+        }
     }
 }

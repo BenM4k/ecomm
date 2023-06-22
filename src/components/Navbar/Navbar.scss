@@ -10,13 +10,26 @@ header {
     nav {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        max-width: 1080px;
+        margin: 0 auto;
 
         .logo {
             .logo-link {
                 text-decoration: none;
-                color: #43300f;
+                color: #2d210c;
                 font-weight: bold;
+                display: flex;
+                align-items: center;
+                padding-top: .2em;
+                .pizza-svg {
+                    width: 40px;
+                    overflow: visible;
+                    stroke: #2d210c;
+                    stroke-width: 4;
+                    stroke-linejoin: round;
+                    stroke-linecap: round;
+                }
             }
         }
 
@@ -24,25 +37,26 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 45px;
 
             li {
                 list-style: none;
                 text-transform: uppercase;
                 position: relative;
-                color: #43300f;
+                color: #2d210c;
                 cursor: pointer;
                 font-weight: bold;
 
                 .profile {
                     text-decoration: none;
-                    color: #43300f;
+                    letter-spacing: 1px;
+                    color: #2d210c;
                 }
 
                 .cart-logo{
                     color: black;
                     font-size: 35px;
-                    margin-left: 70px;
+                    margin-left: 90px;
                 }
                 .cart-number {
                     position: absolute;

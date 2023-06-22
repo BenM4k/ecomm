@@ -1,10 +1,28 @@
 footer {
-    background-color: rgba(255, 255, 255, 0.4);
-    margin-top: 5rem;
-    padding: 1rem 2rem;
-    min-height: 200px;
-    color: #43300f;
+    // background-color: rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    margin: auto;
+    padding: 2rem 2rem 1rem 2rem;
+    color: #2d210c;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    flex: 1;
+
+    .footer-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 1.3rem;
+    }
+
+    .section3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.3em;
+        margin-top: .5em;
+        letter-spacing: 2px;
+    }
 }

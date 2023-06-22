@@ -1,58 +1,92 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 
+import ear from '../../assets/headphones_b_2.webp';
 import { toggleCart, addCount, removeCount } from '../../redux/slices/products/productSlice';
 import './Cart.scss';
 
 const Cart = () => {
+  const cartVariant = {
+    start: { x: '150vw' },
+    end: {
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeInOut',
+      }
+    }
+  }
   const { cartOpen } = useSelector((store) => store.product);
   const dispatch = useDispatch();
-  const cart = useSelector((store) => store.product.cart);
+  const {cart} = useSelector((store) => store.product);
   let total = 0;
-  if (cartOpen.length !== 0) {
+  let totalItems = 1;
+  if (cart.length !== 0) {
       cart.forEach((item) => {
-        total += item.price
+        totalItems = item.price * item.itemCount
+        total += totalItems;
       })
   }
   return (
     <>
         { cartOpen && <div className='cart-wrapper'>
-          <div className="cart-container">
+          <motion.div
+            className="cart-container"
+            variants={cartVariant}
+            initial="start"
+            animate="end"
+          >
             <div className="cart-head">
-              <p>cart</p>
+              <h2 className='cart-title'>Your cart ({cart.length} item(s))</h2>
               <button
                 type="button"
                 onClick={() => dispatch(toggleCart())}
               >
                 close
               </button>
+              <div className="first-cart-side">
+                <h3>Item</h3>
+                <h3>price</h3>
+                <h3>quantity</h3>
+              </div>
             </div>
+
             <div className="cart-body">
               {cart.map((item) => (
                 <div className="cart-details" key={item.id}>
-                  <h1>{item.name}</h1>
-                  <p>{item.desc}</p>
-                  <span>${item.price}</span>
-                  <p className='quantity'>
-                    <span onClick={() => dispatch(addCount(item))}>
+                  <div className="second-cart-side">
+                      <img src={ear} alt={item.name} />
+                      <p>{item.name}</p>
+                  </div>
+                  <span className='cart-details-price'>${item.price}.00</span>
+                  <div className='quantity'>
+                    <span
+                      onClick={() => dispatch(addCount(item))}
+                      className='count-plus'
+                    >
                       <AiOutlinePlus />
                       </span>
-                      {console.log(item.itemCount)}
                     <span className='quant'>{item.itemCount}</span>
-                    <span onClick={() => dispatch(removeCount(item))}>
+                    <span
+                      onClick={() => dispatch(removeCount(item))}
+                      className='count-minus'
+                    >
                       <AiOutlineMinus />
                     </span>
-                  </p>
+                  </div>
                 </div>
               ))}
             </div>
             <div className="cart-footer">
-              <p>Total</p>
-              <span>${total}</span>
+              <div className="cart-footer-price">
+                <p>Total</p>
+                <span>${total}.00</span>
+              </div>
               <button>Pay Now</button>
             </div>
-          </div>
+          </motion.div>
         </div>}
     </>
   )

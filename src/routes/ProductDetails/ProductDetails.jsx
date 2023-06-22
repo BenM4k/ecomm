@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { useParams, NavLink } from 'react-router-dom';
+import { BiChevronLeft } from 'react-icons/bi';
+import { AiOutlineStar, AiFillStar, AiOutlineShoppingCart } from 'react-icons/ai';
 import ear from '../../assets/headphones_b_2.webp';
-import { addToCart, addCount, removeCount } from '../../redux/slices/products/productSlice';
+import { addToCart } from '../../redux/slices/products/productSlice';
 
 import './ProductDetails.scss';
 
@@ -18,26 +19,43 @@ const ProductDetails = () => {
         product.id === id ? 
         <div className="container" key={product.id}>
           <div className='partOne'>
-            <img src={ear} alt="" />
+            <div className="main-img">
+              <img src={ear} alt="" />
+            </div>
+            <div className="side-img">
+              <img src={ear} alt="" />
+              <img src={ear} alt="" />
+              <img src={ear} alt="" />
+              <img src={ear} alt="" />
+            </div>
           </div>
           <div className='partTwo'>
-            <h1>{ product.name }</h1>
-            <p>{product.desc}</p>
-            <span>${product.price}</span>
-            <span>Quantity:</span>
-            <p className='quantity'>
-              <span onClick={() => dispatch(addCount(product))}>
-                <AiOutlinePlus />
-                </span>
-              <span className='quant'>{product.itemCount}</span>
-              <span onClick={() => dispatch(removeCount(product))}>
-                <AiOutlineMinus />
-              </span>
-            </p>
-
+            <NavLink to="/" className='back-home'>
+              <BiChevronLeft />
+              <p>back home</p>
+            </NavLink>
+            <div className="product-details">
+              <h2>{ product.name }</h2>
+              <div className="stars">
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiOutlineStar />
+              </div>
+              <p className='product-details-price'>${product.price}.00</p>
+              <p className='product-details-desc'>{product.desc}</p>
+            </div>
             <div className="btn-container">
-              <button type="button" onClick={() => dispatch(addToCart(product))}>add to cart</button>
-              <button type="button">buy now</button>
+              <button
+                type="button"
+                onClick={() => dispatch(addToCart(product))}
+                className='cart-btn'
+              >
+                <AiOutlineShoppingCart />
+                add to cart
+              </button>
+              <button type="button" className='buy'>buy now</button>
             </div>
         </div>
 

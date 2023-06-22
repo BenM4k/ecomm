@@ -1,16 +1,34 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 
 import { toggleLogin } from '../../redux/slices/products/productSlice';
 import './Login.scss';
 
 const Login = () => {
+  const modalVariant = {
+    start: {
+        y: '-120vh'
+    },
+    end: {
+        y: 0,
+        transition : {
+            duration: 0.8,
+            ease: 'easeInOut',
+        }
+    }
+  }
   const dispatch = useDispatch();
   const login = useSelector((store) => store.product.login);
   return (
     <>
         {login && <div className="login-wrapper">
-            <div className="login-container">
+            <motion.div 
+                className="login-container"
+                variants={modalVariant}
+                initial="start"
+                animate="end"
+            >
                 <button
                     onClick={() => dispatch(toggleLogin())}
                     className='close-login'
@@ -27,7 +45,7 @@ const Login = () => {
                     <button type="button">Submit</button>
                     <span>forget password</span>
                 </form>
-            </div>
+            </motion.div>
         </div>}
     </>
   )

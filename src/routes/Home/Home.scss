@@ -1,6 +1,6 @@
 .hero-banner {
     padding: 0 2rem;
-    height: 60vh;
+    height: 90vh;
     // background: gray;
 
     .splide {
@@ -15,8 +15,8 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            background-color: #383023;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            // background-color: #2d210c;
+            // border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 1em;
             overflow: hidden;
     
@@ -31,7 +31,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    color: #fff;
+                    color: rgb(20, 20, 20);
 
                     .carousel-body {
                         display: flex;
@@ -41,7 +41,11 @@
                         .carousel-header {
                             font-size: 3em;
                         }
-    
+                        
+                        .ai-stars {
+                            display: flex;
+                            gap: 2px;
+                        }
                         .carousel-text {
                             width: 80%;
                             letter-spacing: 1px;
@@ -51,6 +55,13 @@
                 img {
                     width: 500px;
                     height: 430px;
+                    -webkit-box-reflect: 
+                        below 0px 
+                        linear-gradient(
+                            to bottom,
+                            rgba(255, 255, 255, 0.0)
+                            rgba(255, 255, 255, 0.4)
+                        );
                 }
             }
         }

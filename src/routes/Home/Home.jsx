@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import ear from '../../assets/headphones_b_2.webp';
 import { NavLink } from 'react-router-dom';
 
@@ -63,6 +64,13 @@ const Home = () => {
                     <img src={ear} alt={product.name} />
                     <div className="carousel-body">
                       <h1 className='carousel-header'>{product.name}</h1>
+                      <div className="ai-stars">
+                        <AiFillStar />
+                        <AiFillStar />
+                        <AiFillStar />
+                        <AiFillStar />
+                        <AiOutlineStar />
+                      </div>
                       <p className='carousel-text'>{product.desc}</p>
                     </div>
                   </div>

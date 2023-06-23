@@ -71,6 +71,13 @@
                 color: #fff;
                 text-transform: uppercase;
                 letter-spacing: 1px;
+                cursor: pointer;
+            }
+
+            .error {
+                color: red;
+                letter-spacing: 1px;
+                // font-weight: bold;
             }
 
             .remember {

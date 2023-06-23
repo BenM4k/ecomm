@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { toggleLogin, toggleCart } from '../../redux/slices/products/productSlice';
+import { logoutUser } from '../../redux/slices/users/userSlice';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -30,8 +31,10 @@ const Navbar = () => {
       }
     }
   }
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((store) => store.product.cart);
+  const { cart } = useSelector((store) => store.product);
+  const { isLoggedIn, isLoggedOut } = useSelector((store) => store.user);
   return (
     <header>
       <nav>
@@ -61,12 +64,27 @@ const Navbar = () => {
 
         <ul>
           <li>
-            <NavLink to='/profile' className="profile">Profile</NavLink></li>
-          <li onClick={() => dispatch(toggleLogin())}>Log in</li>
-          <li onClick={() => dispatch(toggleCart())}>
-              <span className='cart-number'>{cart.length}</span>
-            <AiOutlineShopping className='cart-logo' />
+            <NavLink to='/profile' className="profile">{isLoggedIn && !isLoggedOut ? 'profile' : ''}</NavLink></li>
+          <li onClick={() => {
+            console.log(isLoggedIn, isLoggedOut)
+            if (isLoggedIn) {
+              dispatch(logoutUser());
+              navigate('/');
+            }
+            if (isLoggedOut) {
+              dispatch(toggleLogin());
+              dispatch(logoutUser());
+            }
+          }}>
+            {isLoggedIn && !isLoggedOut ? 'Log out': 'Log in'}
           </li>
+            {isLoggedIn && !isLoggedOut ? 
+            <li onClick={() => dispatch(toggleCart())}>
+                <span className='cart-number'>{cart.length}</span>
+              <AiOutlineShopping className='cart-logo' />
+            </li>
+            : ''}
+          
         </ul>
       </nav>
     </header>

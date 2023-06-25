@@ -1,194 +1,103 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { client } from '../../Client';
+import useAuth from '../../hooks/useAuth';
 
-import { toggleLogin, toggleSignup } from '../../redux/slices/products/productSlice';
-import { addUser, loginUser, logoutUser } from '../../redux/slices/users/userSlice';
 import './Login.scss';
+import { loginUser } from '../../redux/slices/users/userSlice';
 
 const Login = () => {
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  
-  const navigate = useNavigate();
-  const modalVariant = {
-    start: {
-        y: '-120vh'
-    },
-    end: {
-        y: 0,
-        transition : {
-            duration: 0.8,
-            ease: 'easeInOut',
+    const { setAuth } = useAuth();
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const location = useLocation();
+    // const from = location.state?.from?.pathname || '/profile';
+
+    const userRef = useRef();
+    const errRef = useRef();
+
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('')
+    }, [user, pwd])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const query = `*[_type == 'myusers' && username == $username && password == $password]{roles, token}`;
+            const params = { username: user, password: pwd }
+            const response = await client.fetch(query, params);
+            const from = location.state?.from?.pathname || `/profile/${user}` || '/';
+
+            if (response.length > 0) {
+                const { roles, token } = response[0];
+                console.log(roles);
+                setAuth({ user, pwd, roles, token });
+                dispatch(loginUser());
+                setUser('');
+                setPwd('');
+                navigate(from, { replace: true });
+            }
+        } catch (err) {
+            console.log(err)
         }
     }
-  }
-  const dispatch = useDispatch();
-  const {login, signup } = useSelector((store) => store.product);
-  const { isLoggedIn } = useSelector((store) => store.user);
-
-  return (
-    <>
-        {signup && <div className="login-wrapper">
-            <motion.div 
-                className="login-container"
-                variants={modalVariant}
-                initial="start"
-                animate="end"
-            >
-                <button
-                    onClick={() =>{
-                        dispatch(toggleSignup());
-                    } }
-                    className='close-login'
+    return (
+        <section className='login-wrapper'>
+            <div className="login-container">
+                <p
+                    ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}
+                    aria-live="assertive"
                 >
-                    close
-                </button>
+                    {errMsg}
+                </p>
                 <h1>Sign in</h1>
-                <form className='login-form'>
-                    <label htmlFor="text">First Name</label>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="username">
+                        username:
+                    </label>
                     <input
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        id='username'
+                        ref={userRef}
+                        autoComplete='off'
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
+                        required
                     />
-                    <label htmlFor="text">Last name</label>
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
-                    <label htmlFor="text">username</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <label htmlFor="password">password</label>
+
+                    <label htmlFor="password">
+                        password:
+                    </label>
                     <input
                         type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        id='password'
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                        required
                     />
-                    <button
-                        type="button"
-                        className='submit-login'
-                        onClick={(e) => {
-                            e.preventDefault();
-                            if (name !== '' && lastName !== '' && username !== '' && password !== '') {
-                                const newUser = {
-                                    name,
-                                    lastName,
-                                    username,
-                                    password,
-                                };
-                                dispatch(addUser(newUser));
-                                setName('');
-                                setLastName('');
-                                setUsername('');
-                                setPassword('');
-                                dispatch(toggleSignup());
-                            }else {
-                                setError('Fill all the cases')
-                            }
-                        }}
-                    >
-                        Submit
-                    </button>
-                    <span className='error'>{error}</span>
-                    <div className="login-footer">
-                        <button
-                            className='forget'
-                            onClick={(e) => {
-                                e.preventDefault();
-                                dispatch(toggleLogin());
-                                dispatch(toggleSignup());
-                                setError('');
-                            } }
-                        >
-                            Or Log in
-                        </button>
-                    </div>
+
+                    <button>Sign in</button>
                 </form>
-            </motion.div>
-        </div>}
-        { login && <div className="login-wrapper">
-            <motion.div 
-                className="login-container"
-                variants={modalVariant}
-                initial="start"
-                animate="end"
-            >
-                <button
-                    onClick={() =>{
-                        dispatch(toggleLogin());
-                    } }
-                    className='close-login'
-                >
-                    close
-                </button>
-                <h1>Login</h1>
-                <form className='login-form' onSubmit={(e) => {
-                    e.preventDefault();
-                    if(username !== '' && password !== '') {
-                        const user = {
-                            username,
-                            password,
-                        }
-                        dispatch(loginUser(user));
-                        dispatch(logoutUser());
-                        if (isLoggedIn) {
-                            navigate(`/profile/${user.username}`);
-                            setUsername('');
-                            setPassword('');
-                            dispatch(toggleLogin());
-                        }
-                    }
-                }}>
-                    <label htmlFor="text">username</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <label htmlFor="password">password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <div className="remember">
-                        <input type="checkbox" />
-                        <label htmlFor="checkbox">remember me</label>
-                    </div>
-                    <button type="submit" className='submit-login'>Submit</button>
-                    <div className="login-footer">
-                        <button
-                            className='forget'
-                            onClick={(e) => e.preventDefault()}
-                        >
-                            forget password
-                        </button>
-                        <button
-                            className='forget'
-                            onClick={(e) => {
-                                e.preventDefault();
-                                dispatch(toggleSignup());
-                                dispatch(toggleLogin());
-                            } }
-                        >
-                            Or Sign in
-                        </button>
-                    </div>
-                </form>
-            </motion.div>
-        </div>}
-    </>
-  )
+                <p>
+                    Need an account? <br />
+                    <span className='line'>
+                        <NavLink to="/signup" className='line-a'>Sign up here</NavLink>
+                    </span>
+                </p>
+            </div>
+        </section>
+    )
 }
 
 export default Login

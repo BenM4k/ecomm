@@ -17,7 +17,7 @@ const initialState = {
         {
             name: 'Sims',
             lastName: 'Zed',
-            username: 'Zedsims',
+            username: 'benm4k',
             password: 'password',
         },
         {
@@ -41,21 +41,16 @@ const UsersSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        addUser: (state, action) => {
-            state.users.push(action.payload);
-        },
-        loginUser: (state, action) => {
-            state.users.forEach(user => {
-                if (user.username === action.payload.username && user.password === action.payload.password) {
-                    state.isLoggedIn = true;
-                }
-            })
+        loginUser: (state) => {
+            state.isLoggedIn = true;
+            state.isLoggedOut = false;
         },
         logoutUser: (state) => {
-            state.isLoggedOut = !state.isLoggedOut;
+            state.isLoggedIn = false;
+            state.isLoggedOut = true;
         }
     }
 })
 
-export const { addUser, loginUser, logoutUser } = UsersSlice.actions;
+export const { loginUser, logoutUser } = UsersSlice.actions;
 export default UsersSlice.reducer;

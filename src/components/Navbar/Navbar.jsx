@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AiOutlineShopping } from 'react-icons/ai';
-import { toggleLogin, toggleCart } from '../../redux/slices/products/productSlice';
-import { logoutUser } from '../../redux/slices/users/userSlice';
+import { toggleCart } from '../../redux/slices/products/productSlice';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -31,10 +30,9 @@ const Navbar = () => {
       }
     }
   }
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cart } = useSelector((store) => store.product);
-  const { isLoggedIn, isLoggedOut } = useSelector((store) => store.user);
+  const { isLoggedIn } = useSelector((store) => store.user);
   return (
     <header>
       <nav>
@@ -64,27 +62,25 @@ const Navbar = () => {
 
         <ul>
           <li>
-            <NavLink to='/profile' className="profile">{isLoggedIn && !isLoggedOut ? 'profile' : ''}</NavLink></li>
-          <li onClick={() => {
-            console.log(isLoggedIn, isLoggedOut)
-            if (isLoggedIn) {
-              dispatch(logoutUser());
-              navigate('/');
-            }
-            if (isLoggedOut) {
-              dispatch(toggleLogin());
-              dispatch(logoutUser());
-            }
-          }}>
-            {isLoggedIn && !isLoggedOut ? 'Log out': 'Log in'}
+            <NavLink to="/admin">admin</NavLink>
           </li>
-            {isLoggedIn && !isLoggedOut ? 
+          <li>
+            <NavLink to="/seller">seller</NavLink>
+          </li>
+          <li>
+            <NavLink to='/profile/benm4k' className="profile">{isLoggedIn ? 'profile' : ''}</NavLink></li>
+          <li>
+            {!isLoggedIn
+              ? <NavLink to="/login">Log in</NavLink>
+              : 'Log Out'}
+          </li>
+          {isLoggedIn ?
             <li onClick={() => dispatch(toggleCart())}>
-                <span className='cart-number'>{cart.length}</span>
+              <span className='cart-number'>{cart.length}</span>
               <AiOutlineShopping className='cart-logo' />
             </li>
-            : ''}
-          
+            : ''
+          }
         </ul>
       </nav>
     </header>

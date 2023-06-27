@@ -30,9 +30,9 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className='partTwo'>
-              <NavLink to="/" className='back-home'>
+              <NavLink to="/store" className='back-home'>
                 <BiChevronLeft />
-                <p>back home</p>
+                <p>back to store</p>
               </NavLink>
               <div className="product-details">
                 <h2>{product.title}</h2>

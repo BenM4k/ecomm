@@ -1,20 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 
 const User = () => {
   const { username } = useParams();
-  const users = useSelector((store) => store.user.users);
+  // const users = useSelector((store) => store.user.users);
+  const { user } = useUser();
+  const navigate = useNavigate();
+
   return (
     <>
-      {users.map((user) => (
-        user?.username === username ? <div key={user.firstname}>
-          <h1>{user.firstname}</h1>
-          <h2>{user.lastname}</h2>
-          <h3>{user.username}</h3>
-        </div> :
-          <div></div>
-      ))}
+      {username === user?.firstName ?
+        <section>
+          <h1>{user.firstName}</h1>
+          <h2>{user.lastName}</h2>
+        </section>
+        : navigate('/')}
     </>
   )
 }

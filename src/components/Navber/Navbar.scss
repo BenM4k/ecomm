@@ -22,20 +22,13 @@ nav {
     ul {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 15px;
-        margin-left: 25em;
         list-style-type: none;
         flex: 1;
 
         a {
             color: #313bac;
-        }
-
-        li {
-
-            &:last-child {
-                margin-left: auto;
-            }
         }
     }
 }

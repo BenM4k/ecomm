@@ -3,10 +3,13 @@ import {
     SignedIn,
     SignedOut,
     UserButton,
+    useUser
 } from '@clerk/clerk-react';
 import { NavLink } from 'react-router-dom';
-import './Navbar.scss'
+import './Navbar.scss';
+
 const Navbar = () => {
+    const { user } = useUser();
     return (
         <nav>
             <div><NavLink to='/'>Logo</NavLink></div>
@@ -15,10 +18,10 @@ const Navbar = () => {
                     <li><NavLink to='/admin'>Admin</NavLink></li>
                     <li><NavLink to='/store'>Store</NavLink></li>
                     <li>
-                        <NavLink to='/profile'>Profile</NavLink>
+                        <NavLink to={`/profile/${user?.firstName}`}>Profile</NavLink>
                     </li>
-                    <li><UserButton /></li>
                 </ul>
+                <div><UserButton /></div>
             </SignedIn>
             <SignedOut>
                 <ul>

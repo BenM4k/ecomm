@@ -13,12 +13,20 @@ export const getProducts = createAsyncThunk('products/GetProducts', async (_, th
     }
 })
 
+export const getCategory = createAsyncThunk('category/Getcategory', async (_, thunkAPI) => {
+    const query = `*[_type == 'category']`;
+    try {
+        const response = await client.fetch(query);
+        return response;
+    } catch (err) {
+        return thunkAPI.rejectWithValue('could not fetch the category');
+    }
+})
+
 const initialState = {
     products: [],
-    login: false,
-    signup: false,
     cart: [],
-    cartOpen: false,
+    categories: [],
     error: '',
     productLoading: false,
 };
@@ -27,12 +35,6 @@ const ProductSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
-        toggleLogin: (state) => {
-            state.login = !state.login;
-        },
-        toggleSignup: (state) => {
-            state.signup = !state.signup;
-        },
         toggleCart: (state) => {
             state.cartOpen = !state.cartOpen;
         },
@@ -66,6 +68,9 @@ const ProductSlice = createSlice({
         },
         [getProducts.rejected]: (state, action) => {
             state.error = action.payload;
+        },
+        [getCategory.fulfilled]: (state, action) => {
+            state.categories = action.payload;
         }
     }
 });

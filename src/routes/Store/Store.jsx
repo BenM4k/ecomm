@@ -3,9 +3,20 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { urlFor } from '../../Client';
+import './Store.scss';
 
 const Store = () => {
-    const { products } = useSelector((store) => store.product);
+    const { products, categories } = useSelector((store) => store.product);
+    const mainVariant = {
+        start: { opacity: 0 },
+        end: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                delay: 0.3,
+            }
+        }
+    }
     const liVariant = {
         start: { scale: 1 },
         hover: {
@@ -15,36 +26,19 @@ const Store = () => {
             }
         },
     };
-    const navVariant = {
-        start: { opacity: 1 },
-        hover: { opacity: 1 },
-    }
-    const childVariant = {
-        start: { opacity: 0 },
-        hover: {
-            opacity: 1,
-            transition: {
-                duration: 0.8,
-                type: 'tween',
-            }
-        },
-    }
-    const imgVariant = {
-        start: { y: '30px' },
-        hover: {
-            y: '-10px',
-            transition: {
-                duration: 0.4,
-                type: 'tween',
-            }
-        },
-    }
+
     return (
         <motion.main
             className='main-container'
-            whileInView={{ opacity: [0, 1] }}
-            transition={{ duration: 1.5 }}
+            variants={mainVariant}
+            initial='start'
+            animate='end'
         >
+            <ul className='categories'>
+                {categories?.map(category => (
+                    <li key={category.title}>{category.title}</li>
+                ))}
+            </ul>
             <h1>Our <span>Top Sales</span></h1>
             <ul className='product-list'>
                 {products.map(product => (
@@ -58,30 +52,28 @@ const Store = () => {
                         <NavLink
                             to={`/product/${product._id}`}
                             className="product-link"
-                            variants={navVariant}
                             initial="start"
                             hover="hover"
                         >
-                            {console.log()}
+                            <motion.h2
+                                className='product-name'
+                            >
+                                {product.title}
+                            </motion.h2>
                             <motion.img
                                 src={urlFor(product.imageurl).url()}
                                 alt={product.title}
                                 className='product-image'
-                                variants={imgVariant}
                             />
-                            <motion.h2
-                                className='product-name'
-                                variants={childVariant}
-                            >
-                                {product.title}
-                            </motion.h2>
+                        </NavLink>
+                        <div className="product-footer">
+                            <button>Add to cart</button>
                             <motion.span
                                 className='product-price'
-                                variants={childVariant}
                             >
                                 ${product.price}
                             </motion.span>
-                        </NavLink>
+                        </div>
                     </motion.li>
                 ))}
             </ul>

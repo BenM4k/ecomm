@@ -55,7 +55,6 @@ const ProductDetails = () => {
                   <AiOutlineShoppingCart />
                   add to cart
                 </button>
-                <button type="button" className='buy'>buy now</button>
               </div>
             </div>
 

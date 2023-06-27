@@ -1,0 +1,41 @@
+nav {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-weight: bolder;
+    font-size: 1.2em;
+
+    div {
+        a {
+            color: #313bac;
+
+            &:active {
+                color: #313bac;
+            }
+        }
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-left: 25em;
+        list-style-type: none;
+        flex: 1;
+
+        a {
+            color: #313bac;
+        }
+
+        li {
+
+            &:last-child {
+                margin-left: auto;
+            }
+        }
+    }
+}

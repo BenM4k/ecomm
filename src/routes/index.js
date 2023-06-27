@@ -4,4 +4,7 @@ export { default as Unauthorized } from './Unauthorized/Unauthorized';
 export { default as ProductDetails } from './ProductDetails/ProductDetails';
 export { default as NotFound } from './NotFound/NotFound';
 export { default as User } from './User/User';
-export { default as Seller } from './Seller/Seller';
+export { default as Login } from './SignIn/SignIn';
+export { default as Register } from './Register/Register';
+export { default as Store } from './Store/Store';
+export { default as Shipping } from './Shipping/Shipping';

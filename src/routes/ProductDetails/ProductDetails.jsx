@@ -43,7 +43,7 @@ const ProductDetails = () => {
                   <AiFillStar />
                   <AiOutlineStar />
                 </div>
-                <p className='product-details-price'>${product.price}.00</p>
+                <p className='product-details-price'>${product.price}</p>
                 <p className='product-details-desc'>{product.description}</p>
               </div>
               <div className="btn-container">

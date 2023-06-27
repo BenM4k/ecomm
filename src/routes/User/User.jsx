@@ -7,12 +7,14 @@ const User = () => {
   const users = useSelector((store) => store.user.users);
   return (
     <>
-        { users.map((user) => (
-            user.username === username ? <div key={user.name}>
-                { user.name }
-            </div> :
-            <div></div>
-        ))}
+      {users.map((user) => (
+        user?.username === username ? <div key={user.firstname}>
+          <h1>{user.firstname}</h1>
+          <h2>{user.lastname}</h2>
+          <h3>{user.username}</h3>
+        </div> :
+          <div></div>
+      ))}
     </>
   )
 }

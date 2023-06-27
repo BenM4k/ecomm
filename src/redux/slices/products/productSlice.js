@@ -19,6 +19,8 @@ const initialState = {
     signup: false,
     cart: [],
     cartOpen: false,
+    error: '',
+    productLoading: false,
 };
 
 const ProductSlice = createSlice({
@@ -56,9 +58,15 @@ const ProductSlice = createSlice({
         },
     },
     extraReducers: {
+        [getProducts.pending]: (state) => {
+            state.productLoading = true;
+        },
         [getProducts.fulfilled]: (state, action) => {
             state.products = action.payload;
         },
+        [getProducts.rejected]: (state, action) => {
+            state.error = action.payload;
+        }
     }
 });
 

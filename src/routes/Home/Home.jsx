@@ -10,7 +10,7 @@ import './Home.scss';
 import '@splidejs/react-splide/css';
 
 const Home = () => {
-  const products = useSelector((store) => store.product.products);
+  const { products, error, loadingProducts } = useSelector((store) => store.product);
   const liVariant = {
     start: { scale: 1 },
     hover: {
@@ -44,6 +44,13 @@ const Home = () => {
       }
     },
   }
+
+  if (error) {
+    return <h1>Failed to fetch products</h1>
+  }
+  if (loadingProducts) {
+    return <h1>Loading...</h1>
+  }
   return (
     <>
       <div className='hero-banner'>
@@ -59,9 +66,9 @@ const Home = () => {
           <div className="custom-wrapper">
             <SplideTrack>
               {products.map(product => (
-                <SplideSlide key={product.id}>
+                <SplideSlide key={product._id}>
                   <div className="carousel-container">
-                    <img src={urlFor(product.imageurl).url()} alt={product.name} />
+                    <img src={urlFor(product.imageurl).url()} alt={product.title} />
                     <div className="carousel-body">
                       <h1 className='carousel-header'>{product.title}</h1>
                       <div className="ai-stars">
@@ -90,10 +97,11 @@ const Home = () => {
         whileInView={{ opacity: [0, 1] }}
         transition={{ duration: 1.5 }}
       >
+        <h1>Our <span>Top Sales</span></h1>
         <ul className='product-list'>
           {products.map(product => (
             <motion.li
-              key={product.id}
+              key={product._id}
               className='product'
               variants={liVariant}
               initial="start"

@@ -1,24 +1,19 @@
 import React from 'react';
 // import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
+import { useParams } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const User = () => {
   const { username } = useParams();
+  const { auth } = useAuth();
   // const users = useSelector((store) => store.user.users);
-  const { user } = useUser();
-  const navigate = useNavigate();
-
   return (
     <>
-      {username === user?.firstName ?
-        <section>
-          <h1>{user.firstName}</h1>
-          <h2>{user.lastName}</h2>
-        </section>
-        : navigate('/')}
+      <h1>hello {username}</h1>
+      <h2>First name: {auth?.userInfo?.firstname}</h2>
+      <h2>last name: {auth?.userInfo?.lastname}</h2>
     </>
   )
 }
 
-export default User
+export default User;

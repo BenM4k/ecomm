@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import Layout from './components/Layout/Layout';
 import { Home, Login, Register, NotFound, ProductDetails, Unauthorized, User, Admin, Shipping, Store, Cart } from './routes';
 import RequireAuth from './components/RequireAuth';
+import PersistLogin from './components/PersistLogin';
 import { getProducts, getCategory } from './redux/slices/products/productSlice';
 
 const ROLES = {
-  "admin": process.env.REACT_APP_ADMIN_ROLE,
-  "seller": process.env.REACT_APP_SELLER_ROLE,
-  "user": process.env.REACT_APP_USER_ROLE
+  "admin": 998,
+  "seller": 450,
+  "user": 101
 }
 
 const App = () => {
@@ -31,17 +32,20 @@ const App = () => {
         <Route path='/sign-up' element={<Register />} />
         <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/store' element={<Store />} />
-        {/* user routes */}
-        <Route element={<RequireAuth allowedRoles={[ROLES.user]} />} >
-          <Route path='/profile/:username' element={<User />} />
-        </Route >
-        <Route element={<RequireAuth allowedRoles={[ROLES.seller, ROLES.admin]} />} >
-          <Route path='/shipping' element={<Shipping />} />
-          <Route path='/cart' element={<Cart />} />
-        </Route>
-        {/* Protected routes */}
-        <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />} >
-          <Route path='/admin' element={<Admin />} />
+
+        <Route element={<PersistLogin />}>
+          {/* user routes */}
+          <Route element={<RequireAuth allowedRoles={[ROLES.user]} />} >
+            <Route path='/profile/:username' element={<User />} />
+          </Route >
+          <Route element={<RequireAuth allowedRoles={[ROLES.seller, ROLES.admin]} />} >
+            <Route path='/shipping' element={<Shipping />} />
+            <Route path='/cart' element={<Cart />} />
+          </Route>
+          {/* Protected routes */}
+          <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />} >
+            <Route path='/admin' element={<Admin />} />
+          </Route>
         </Route>
       </Route>
     </Routes >

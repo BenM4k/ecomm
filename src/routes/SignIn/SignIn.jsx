@@ -1,45 +1,55 @@
 import React, { useState } from 'react';
 import { useNavigate, NavLink, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/slices/users/userSlice';
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
 
 const LogIn = () => {
     const { setAuth } = useAuth();
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
-    const [password, setPassword] = useState("");
+    const [pwd, setPwd] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = "/api/users/login";
+        const url = "/auth";
         const user = {
             email,
-            password,
+            pwd,
         }
 
         if (user) {
             try {
-                const response = await axios.post(url, user);
+                const response = await axios.post(url, JSON.stringify(user), {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                });
+
                 const accessToken = response?.data.accessToken;
                 const roles = response?.data.roles;
-                setAuth({ user, roles, accessToken });
+                const userInfo = response?.data.userInfo;
+                setAuth({ user, userInfo, roles, accessToken });
                 setEmail("");
-                setPassword("");
+                setPwd("");
                 navigate(from, { replace: true });
+                dispatch(loginUser());
             } catch (err) {
                 if (!err.response) {
                     setError("No server response")
                 } else if (err.response?.status === 400) {
                     setError("All fields are required")
                 } else if (err.response?.status === 401) {
-                    setError("Invalid username or password")
+                    setError("Unauthorized")
+                } else {
+                    setError("Login failed")
                 }
-                console.log(err)
             }
         }
     }
@@ -59,8 +69,8 @@ const LogIn = () => {
                 <input
                     type="password"
                     id='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={pwd}
+                    onChange={(e) => setPwd(e.target.value)}
                     required
                 />
                 <button type="submit">submit</button>

@@ -1,34 +1,24 @@
 import React from 'react';
-import {
-    SignedIn,
-    SignedOut,
-    UserButton,
-    useUser
-} from '@clerk/clerk-react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.scss';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 const Navbar = () => {
-    const { user } = useUser();
     return (
         <nav>
             <div><NavLink to='/'>Logo</NavLink></div>
-            <SignedIn>
-                <ul>
-                    <li><NavLink to='/admin'>Admin</NavLink></li>
-                    <li><NavLink to='/store'>Store</NavLink></li>
-                    <li>
-                        <NavLink to={`/profile/${user?.firstName}`}>Profile</NavLink>
-                    </li>
-                </ul>
-                <div><UserButton /></div>
-            </SignedIn>
-            <SignedOut>
-                <ul>
-                    <li><NavLink to='/store'>Store</NavLink></li>
-                    <li><NavLink to='/sign-in'>Sign in</NavLink></li>
-                </ul>
-            </SignedOut>
+            <ul>
+                <li><NavLink to='/admin'>Admin</NavLink></li>
+                <li><NavLink to='/store'>Store</NavLink></li>
+                <li>
+                    <NavLink to={`/profile/`}>Profile</NavLink>
+                </li>
+            </ul>
+            <div className='navbar-cart'><NavLink to='cart'><AiOutlineShoppingCart /></NavLink></div>
+            <ul>
+                <li><NavLink to='/store'>Store</NavLink></li>
+                <li><NavLink to='/sign-in'>Sign in</NavLink></li>
+            </ul>
         </nav>
     )
 }

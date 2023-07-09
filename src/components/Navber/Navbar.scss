@@ -19,6 +19,32 @@ nav {
         }
     }
 
+    .navbar-cart {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2),
+            -2px -2px 2px rgba(255, 255, 255, 0.7);
+
+        a {
+            padding: .3rem .5rem;
+
+        }
+
+        svg {
+            padding-top: .2rem;
+        }
+
+        &:hover {
+            background-color: #313bac;
+
+            svg {
+                color: #fff;
+            }
+        }
+    }
+
     ul {
         display: flex;
         align-items: center;

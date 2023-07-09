@@ -22,12 +22,6 @@ const ProductDetails = () => {
               <div className="main-img">
                 <img src={urlFor(product.imageurl).url()} alt="" />
               </div>
-              <div className="side-img">
-                <img src={urlFor(product.imageurl).url()} alt="" />
-                <img src={urlFor(product.imageurl).url()} alt="" />
-                <img src={urlFor(product.imageurl).url()} alt="" />
-                <img src={urlFor(product.imageurl).url()} alt="" />
-              </div>
             </div>
             <div className='partTwo'>
               <NavLink to="/store" className='back-home'>
@@ -35,7 +29,10 @@ const ProductDetails = () => {
                 <p>back to store</p>
               </NavLink>
               <div className="product-details">
-                <h2>{product.title}</h2>
+                <div className="details-head">
+                  <h2>{product.title}</h2>
+                  <p className='product-details-price'>${product.price}</p>
+                </div>
                 <div className="stars">
                   <AiFillStar />
                   <AiFillStar />
@@ -43,7 +40,6 @@ const ProductDetails = () => {
                   <AiFillStar />
                   <AiOutlineStar />
                 </div>
-                <p className='product-details-price'>${product.price}</p>
                 <p className='product-details-desc'>{product.description}</p>
               </div>
               <div className="btn-container">

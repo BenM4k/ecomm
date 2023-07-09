@@ -12,8 +12,8 @@ const Store = () => {
         end: {
             opacity: 1,
             transition: {
-                duration: 0.8,
-                delay: 0.3,
+                duration: 0.3,
+                delay: 0.3
             }
         }
     }
@@ -30,9 +30,6 @@ const Store = () => {
     return (
         <motion.main
             className='main-container'
-            variants={mainVariant}
-            initial='start'
-            animate='end'
         >
             <ul className='categories'>
                 {categories?.map(category => (
@@ -40,7 +37,12 @@ const Store = () => {
                 ))}
             </ul>
             <h1>Our <span>Top Sales</span></h1>
-            <ul className='product-list'>
+            <motion.ul
+                className='product-list'
+                variants={mainVariant}
+                initial='start'
+                animate='end'
+            >
                 {products.map(product => (
                     <motion.li
                         key={product._id}
@@ -76,7 +78,7 @@ const Store = () => {
                         </div>
                     </motion.li>
                 ))}
-            </ul>
+            </motion.ul>
         </motion.main>
     )
 }

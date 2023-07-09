@@ -1,5 +1,4 @@
 .product-detail-container {
-    flex: 3;
     margin-top: 7rem;
     display: flex;
     align-items: center;
@@ -7,15 +6,16 @@
 
 
     .container {
-        height: 66vh;
         border-radius: .5rem;
 
         max-width: 1080px;
+        height: 500px;
+        padding: .4rem;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
+        gap: 40px;
         overflow: hidden;
 
         .partOne {
@@ -24,50 +24,33 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-
-            img {
-                height: 100px;
-                width: 100px;
-            }
+            padding: 10px;
 
             .main-img {
                 width: 100%;
-                height: 70%;
-                background-color: rgba(255, 255, 255, 0.3);
                 border: 2px solid rgba(255, 255, 255, 0.5);
-                border-radius: 4px;
+                border-radius: 10px;
+                box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3),
+                    -2px -1px 4px rgba(255, 255, 255, 0.6);
+                overflow: visible;
 
                 img {
                     width: 100%;
-                    height: 100%;
+                    height: 460px;
                 }
             }
-
-            .side-img {
-                flex: 1;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 5px;
-
-                img {
-                    background-color: rgba(255, 255, 255, 0.3);
-                    border: 2px solid rgba(255, 255, 255, 0.5);
-                    border-radius: 2px;
-                    width: 23%;
-                }
-            }
-
         }
 
         .partTwo {
-            padding: 1rem;
             height: 100%;
             border-radius: .5rem;
             flex: 1;
-
-            gap: 10px;
             color: #030303;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: .5rem 0;
 
             .back-home {
                 font-weight: bold;
@@ -78,65 +61,65 @@
             }
 
             .product-details {
-                margin-top: 2.5em;
+                margin-top: 1.5em;
+
+                .details-head {
+                    width: 80%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .product-details-price {
+                        font-size: 1.5em;
+                        font-weight: bold;
+                        color: #313bac;
+                        text-shadow: #313bac;
+                    }
+                }
 
                 .stars {
                     margin-top: .5em;
                 }
 
-                .product-details-price {
-                    margin-top: 1em;
-                    font-size: 1.5em;
-                    font-weight: bold;
-                    color: green;
-                }
 
                 .product-details-desc {
-                    margin-top: 1em;
-                    width: 60%;
+                    margin-top: 3em;
+                    width: 80%;
                 }
             }
 
             .btn-container {
-                margin-top: 2em;
+                margin-top: auto;
                 display: flex;
 
                 button {
                     padding: .7rem 1.5rem;
-                    border: 1px solid #030303;
-                    border-radius: .19rem;
+                    border-radius: 20px;
                     font-weight: 500;
                     background-color: transparent;
-                    color: #030303;
-                    text-transform: uppercase;
-                    font-weight: 500;
+                    font-weight: 600;
                     cursor: pointer;
                     outline: none;
-
-                    &:active {
-                        opacity: 0.8;
-                    }
-                }
-
-                .cart-btn {
                     display: flex;
                     align-items: center;
                     gap: 5px;
+                    color: #313bac;
+                    border: none;
+                    box-shadow: 4px 3px 3px rgba(0, 0, 0, 0.3),
+                        -5px -3px 3px rgba(255, 255, 255, 0.7);
 
                     &:hover {
+                        background-color: #313bac;
                         color: #fff;
-                        background-color: #030303;
+                    }
+
+                    &:active {
+                        opacity: 0.8;
                     }
 
                     svg {
                         font-size: 1.25em;
                     }
-                }
-
-                .buy {
-                    color: #fff;
-                    background-color: #2d210c;
-                    margin-left: 1em;
                 }
             }
         }

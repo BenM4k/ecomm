@@ -8,16 +8,14 @@ import useLogout from '../../hooks/useLogout';
 import { logoutUser } from '../../redux/slices/users/userSlice';
 
 const Navbar = () => {
-    const { auth, setAuth } = useAuth();
-    console.log(auth.roles)
-    const { isLoggedIn, isLoggedOut } = useSelector((store) => store.user);
+    const { auth } = useAuth();
+    const { isLoggedIn } = useSelector((store) => store.user);
     const navigate = useNavigate();
     const logout = useLogout();
     const dispatch = useDispatch();
 
-    const handleLogout = () => {
-        setAuth({});
-        logout();
+    const handleLogout = async () => {
+        await logout();
         navigate('/');
         dispatch(logoutUser());
     }
@@ -26,8 +24,16 @@ const Navbar = () => {
             <div><NavLink to='/'>Logo</NavLink></div>
             <ul>
                 {auth?.roles?.includes(998)
-                    ? <li><NavLink to='/admin'>Admin</NavLink></li>
-                    : <span />
+                    ? <>
+                        <li><NavLink to='/admin'>Admin</NavLink></li>
+                        <li><NavLink to='/store'>Store</NavLink></li>
+                        <li>
+                            <NavLink to={`/profile/${auth?.userInfo?.username}`}>Profile</NavLink>
+                        </li>
+                        <button onClick={handleLogout}>Log Out</button>
+                        <div className='navbar-cart'><NavLink to='cart'><AiOutlineShoppingCart /></NavLink></div>
+                    </>
+                    : <li><NavLink ink to='/sign-in'>Sign in</NavLink></li>
                 }
                 {isLoggedIn
                     ?
@@ -36,17 +42,11 @@ const Navbar = () => {
                         <li>
                             <NavLink to={`/profile/${auth?.userInfo?.username}`}>Profile</NavLink>
                         </li>
-                        <li onClick={handleLogout}>Log Out</li>
+                        <button onClick={handleLogout}>Log Out</button>
                         <div className='navbar-cart'><NavLink to='cart'><AiOutlineShoppingCart /></NavLink></div>
                     </>
                     : <span />
                 }
-                {
-                    isLoggedOut
-                        ? <li><NavLink ink to='/sign-in'>Sign in</NavLink></li>
-                        : <span />
-                }
-
             </ul>
         </nav>
     )

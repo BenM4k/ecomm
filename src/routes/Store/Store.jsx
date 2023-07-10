@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { urlFor } from '../../Client';
 import './Store.scss';
+import { addToCart } from '../../redux/slices/products/productSlice';
 
 const Store = () => {
+    const dispatch = useDispatch();
     const { products, categories } = useSelector((store) => store.product);
     const mainVariant = {
         start: { opacity: 0 },
@@ -69,7 +71,11 @@ const Store = () => {
                             />
                         </NavLink>
                         <div className="product-footer">
-                            <button>Add to cart</button>
+                            <button
+                                onClick={() => dispatch(addToCart(product))}
+                            >
+                                Add to cart
+                            </button>
                             <motion.span
                                 className='product-price'
                             >

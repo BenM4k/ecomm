@@ -35,28 +35,13 @@ const ProductSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
-        toggleCart: (state) => {
-            state.cartOpen = !state.cartOpen;
-        },
         addToCart: (state, action) => {
-            const isDuplicate = state.cart.some(element => element.id === action.payload.id);
-            if (isDuplicate) {
-                return;
-            }
+            const isDuplicate = state.cart.some(element => element._id === action.payload._id);
+            if (isDuplicate) return;
             state.cart.push(action.payload);
         },
-        addCount: (state, action) => {
-            const product = state.cart.find(product => product.id === action.payload.id);
-            product.itemCount += 1;
-        },
-        removeCount: (state, action) => {
-            const product = state.cart.find(product => product.id === action.payload.id);
-            if (product.itemCount > 1) {
-                product.itemCount -= 1;
-            }
-            else {
-                return;
-            }
+        removeToCart: (state, action) => {
+            state.cart.filter((item) => item._id === !action.payload._id)
         },
     },
     extraReducers: {
@@ -75,5 +60,5 @@ const ProductSlice = createSlice({
     }
 });
 
-export const { addToCart, toggleCart, toggleLogin, toggleSignup, addCount, removeCount } = ProductSlice.actions;
+export const { addToCart, removeToCart } = ProductSlice.actions;
 export default ProductSlice.reducer;

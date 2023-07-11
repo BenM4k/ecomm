@@ -11,6 +11,7 @@ const useLogout = () => {
             });
             console.log(response.data);
             setAuth({})
+            localStorage.setItem('cart', JSON.stringify([]));
         } catch (err) {
             console.log(err);
         }

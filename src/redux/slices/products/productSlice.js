@@ -25,7 +25,6 @@ export const getCategory = createAsyncThunk('category/Getcategory', async (_, th
 
 const initialState = {
     products: [],
-    cart: [],
     categories: [],
     error: '',
     productLoading: false,
@@ -35,13 +34,13 @@ const ProductSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
-        addToCart: (state, action) => {
-            const isDuplicate = state.cart.some(element => element._id === action.payload._id);
-            if (isDuplicate) return;
-            state.cart.push(action.payload);
+        itemCountPlus: (state, action) => {
+            console.log(action.payload._id)
+
         },
-        removeToCart: (state, action) => {
-            state.cart.filter((item) => item._id === !action.payload._id)
+        itemCountMinus: (state, action) => {
+            const newCart = state.cart.filter((item) => item.id === action.payload._id);
+            console.log(newCart)
         },
     },
     extraReducers: {
@@ -60,5 +59,5 @@ const ProductSlice = createSlice({
     }
 });
 
-export const { addToCart, removeToCart } = ProductSlice.actions;
+export const { addToCart, removeToCart, itemCountPlus, itemCountMinus } = ProductSlice.actions;
 export default ProductSlice.reducer;

@@ -25,15 +25,15 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
-        <Route path='/' element={<Home />} />
-        <Route path='*' element={<NotFound />} />
-        <Route path='/product/:id' element={<ProductDetails />} />
-        <Route path='/sign-in' element={<Login />} />
-        <Route path='/sign-up' element={<Register />} />
-        <Route path='/unauthorized' element={<Unauthorized />} />
-        <Route path='/store' element={<Store />} />
 
         <Route element={<PersistLogin />}>
+          <Route path='/' element={<Home />} />
+          <Route path='*' element={<NotFound />} />
+          <Route path='/product/:id' element={<ProductDetails />} />
+          <Route path='/sign-in' element={<Login />} />
+          <Route path='/sign-up' element={<Register />} />
+          <Route path='/unauthorized' element={<Unauthorized />} />
+          <Route path='/store' element={<Store />} />
           {/* user routes */}
           <Route element={<RequireAuth allowedRoles={[ROLES.user]} />} >
             <Route path='/profile/:username' element={<User />} />

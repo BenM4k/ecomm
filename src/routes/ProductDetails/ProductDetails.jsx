@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
 import { AiOutlineStar, AiFillStar, AiOutlineShoppingCart } from 'react-icons/ai';
-import { addToCart } from '../../redux/slices/products/productSlice';
+import { addToCart } from '../../redux/slices/cart/cartSlice';
 import { urlFor } from '../../Client';
 
 import './ProductDetails.scss';

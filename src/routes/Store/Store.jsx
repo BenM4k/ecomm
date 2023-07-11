@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { urlFor } from '../../Client';
 import './Store.scss';
-import { addToCart } from '../../redux/slices/products/productSlice';
+import { addToCart } from '../../redux/slices/cart/cartSlice';
 
 const Store = () => {
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const Store = () => {
                 initial='start'
                 animate='end'
             >
-                {products.map(product => (
+                {products?.map(product => (
                     <motion.li
                         key={product._id}
                         className='product'

@@ -4,16 +4,22 @@ import { NavLink } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { addOrder } from '../../redux/slices/order/orderSlice'
 import Order from '../../models/orderModel';
-import useAuth from '../../hooks/useAuth';
-import useChange from '../../hooks/useChange';
+// import useAuth from '../../hooks/useAuth';
 // import './Shipping.scss';
 
 const Shipping = () => {
-    const change = useChange();
     const dispatch = useDispatch();
     const cart = useSelector((store) => store.cart);
-    const { auth } = useAuth();
 
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    const time = `${year}-${month}-${day}-${hour}-${minutes}-${seconds}`;
     //page control
     const [firstPage, setFirstPage] = useState(true);
     const [secondPage, setSecondPage] = useState(false);
@@ -36,7 +42,7 @@ const Shipping = () => {
     const paymentMethod = [card, cardName, cardNumber, cardSecurity, cardDate];
 
     //get total amount
-    let total = 0;
+    let total = 10;
 
     cart?.forEach((item) => {
         let amount = item?.price * item?.itemCount;
@@ -45,8 +51,10 @@ const Shipping = () => {
 
     //set new Order
     const newOrder = new Order(
-        uuid, auth?.userId, cart, total, 'pending', Date.now(), shippingDetails, paymentMethod
+        uuid(), 'Bee mak', cart, total, 'pending', time, shippingDetails, paymentMethod
     );
+
+    const validateOrder = newOrder.validate();
 
     return (
         <div className='ship-container'>
@@ -61,17 +69,21 @@ const Shipping = () => {
             <div className="ship-body">
                 <div className={firstPage ? "ship-address" : "ship-address hidden"} id='residence'>
                     <h2>Enter your shipping address</h2>
-                    <select name="country" id="country" value={country} onChange={(e) => change(e, setCountry)}>
+                    <select name="country" id="country" value={country} onChange={(e) => setCountry(e.target.value)}>
                         <option value="USA">USA</option>
                         <option value="CANADA">CANADA</option>
                         <option value="MEXICO">MEXICO</option>
                         <option value="BRAZIL">BRAZIL</option>
                         <option value="RU">RU</option>
                     </select>
-                    <input type="text" value={street} onChange={(e) => change(e, setStreet)} />
-                    <input type="text" value={streetAddress} onChange={(e) => change(e, setStreetAddress)} />
-                    <input type="text" value={road} onChange={(e) => change(e, setRoad)} />
-                    <input type="text" value={postCode} onChange={(e) => change(e, setPostCode)} />
+                    <label>Street name</label>
+                    <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
+                    <label>Street address</label>
+                    <input type="text" value={streetAddress} onChange={(e) => setStreetAddress(e.target.value)} />
+                    <label>Road</label>
+                    <input type="text" value={road} onChange={(e) => setRoad(e.target.value)} />
+                    <label htmlFor="">Post code</label>
+                    <input type="text" value={postCode} onChange={(e) => setPostCode(e.target.value)} />
 
                     <div className="ship-btns">
                         <button
@@ -95,14 +107,14 @@ const Shipping = () => {
                 <div className="pay-method" id='payment'>
                     <h2>Select your payment method</h2>
                     <div className="card">
-                        <input type="checkbox" name="visa" id="" placeholder='visa' value={card} onChange={(e) => change(e, setCard)} /> visa
+                        <input type="checkbox" name="visa" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} /> visa
 
                     </div>
                     <div className="bic-card">
-                        <input type="text" value={cardNumber} onChange={(e) => change(e, setCardNumber)} />
-                        <input type="text" value={cardSecurity} onChange={(e) => change(e, setCardSecurity)} />
-                        <input type="text" value={cardName} onChange={(e) => change(e, setCardName)} />
-                        <input type="text" value={cardDate} onChange={(e) => change(e, setCardDate)} />
+                        <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
+                        <input type="text" value={cardSecurity} onChange={(e) => setCardSecurity(e.target.value)} />
+                        <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} />
+                        <input type="text" value={cardDate} onChange={(e) => setCardDate(e.target.value)} />
                     </div>
                     <button
                         type="button"
@@ -136,8 +148,17 @@ const Shipping = () => {
                     <button
                         type="button"
                         onClick={() => {
-                            setThirdPage(false);
-                            dispatch(addOrder(newOrder))
+                            if (validateOrder.length > 0) {
+                                console.log('Order validation errors');
+
+                                validateOrder.forEach((order) => {
+                                    console.log(`- ${order}`);
+                                });
+                            } else {
+                                console.log('Valid order');
+                                dispatch(addOrder(newOrder))
+                                setThirdPage(false);
+                            }
                         }}
                     >
                         <NavLink to='#payed'>Confirm</NavLink>
@@ -147,6 +168,8 @@ const Shipping = () => {
                 <div className="payed" id="payed">
                     <div className="confirm-button"></div>
                 </div>
+
+                <NavLink to='/admin'>admin</NavLink>
             </div>
         </div>
     )

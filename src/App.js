@@ -34,14 +34,17 @@ const App = () => {
           <Route path='/sign-up' element={<Register />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
           <Route path='/store' element={<Store />} />
+          <Route path='/shipping' element={<Shipping />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/admin' element={<Admin />} />
           {/* user routes */}
           <Route element={<RequireAuth allowedRoles={[ROLES.user]} />} >
             <Route path='/profile/:username' element={<User />} />
           </Route >
-          <Route element={<RequireAuth allowedRoles={[ROLES.seller, ROLES.admin]} />} >
+          {/* <Route element={<RequireAuth allowedRoles={[ROLES.seller, ROLES.admin]} />} >
             <Route path='/shipping' element={<Shipping />} />
             <Route path='/cart' element={<Cart />} />
-          </Route>
+          </Route> */}
           {/* Protected routes */}
           <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />} >
             <Route path='/admin' element={<Admin />} />

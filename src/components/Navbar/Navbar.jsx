@@ -22,29 +22,25 @@ const Navbar = () => {
         <nav>
             <div><NavLink to='/'>Logo</NavLink></div>
             <ul>
-                {auth?.roles?.includes(998)
+                <li><NavLink to='/store'>Store</NavLink></li>
+                {auth?.roles?.includes(parseInt(process.env.REACT_APP_ADMIN_ROLE))
                     ? <>
                         <li><NavLink to='/admin'>Admin</NavLink></li>
-                        {/* <li><NavLink to='/store'>Store</NavLink></li>
-                        <li>
-                            <NavLink to={`/profile/${auth?.userInfo?.username}`}>Profile</NavLink>
-                        </li>
-                        <button onClick={handleLogout}>Log Out</button>
-                        <div className='navbar-cart'><NavLink to='cart'><AiOutlineShoppingCart /></NavLink></div> */}
                     </>
                     : <span />
                 }
                 {auth?.roles
                     ?
                     <>
-                        <li><NavLink to='/store'>Store</NavLink></li>
                         <li>
-                            <NavLink to={`/profile/${auth?.userInfo?.username}`}>Profile</NavLink>
+                            <NavLink to={`/profile/${auth?.userInfo.username}`}>Profile</NavLink>
                         </li>
+                        <li className='navbar-cart'><NavLink to='cart'><AiOutlineShoppingCart /></NavLink></li>
                         <button onClick={handleLogout}>Log Out</button>
-                        <div className='navbar-cart'><NavLink to='cart'><AiOutlineShoppingCart /></NavLink></div>
                     </>
-                    : <li><NavLink ink to='/sign-in'>Sign in</NavLink></li>
+                    : <>
+                        <li><NavLink to='/sign-in'>Sign in</NavLink></li>
+                    </>
                 }
             </ul>
         </nav>

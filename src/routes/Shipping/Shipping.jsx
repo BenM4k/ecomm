@@ -47,6 +47,7 @@ const Shipping = () => {
     cart?.forEach((item) => {
         let amount = item?.price * item?.itemCount;
         total += amount;
+        total.toFixed(2);
     })
 
     //set new Order

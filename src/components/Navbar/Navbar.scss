@@ -12,15 +12,11 @@ nav {
     div {
         a {
             color: #313bac;
-
-            &:active {
-                color: #313bac;
-            }
         }
     }
 
     .navbar-cart {
-        margin-right: 1rem;
+        margin-left: auto;
         display: flex;
         align-items: center;
         border-radius: 50%;
@@ -46,10 +42,11 @@ nav {
     }
 
     ul {
+        margin-left: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 15px;
+        gap: 25px;
         list-style-type: none;
         flex: 1;
 

@@ -8,9 +8,9 @@ import PersistLogin from './components/PersistLogin';
 import { getProducts, getCategory } from './redux/slices/products/productSlice';
 
 const ROLES = {
-  "admin": 998,
-  "seller": 450,
-  "user": 101
+  "admin": parseInt(process.env.REACT_APP_ADMIN_ROLE),
+  "seller": parseInt(process.env.REACT_APP_SELLER_ROLE),
+  "user": parseInt(process.env.REACT_APP_USER_ROLE)
 }
 
 const App = () => {
@@ -34,17 +34,17 @@ const App = () => {
           <Route path='/sign-up' element={<Register />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
           <Route path='/store' element={<Store />} />
-          <Route path='/shipping' element={<Shipping />} />
+          {/* <Route path='/shipping' element={<Shipping />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/admin' element={<Admin />} />
+          <Route path='/admin' element={<Admin />} /> */}
           {/* user routes */}
           <Route element={<RequireAuth allowedRoles={[ROLES.user]} />} >
             <Route path='/profile/:username' element={<User />} />
           </Route >
-          {/* <Route element={<RequireAuth allowedRoles={[ROLES.seller, ROLES.admin]} />} >
+          <Route element={<RequireAuth allowedRoles={[ROLES.seller, ROLES.admin]} />} >
             <Route path='/shipping' element={<Shipping />} />
             <Route path='/cart' element={<Cart />} />
-          </Route> */}
+          </Route>
           {/* Protected routes */}
           <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />} >
             <Route path='/admin' element={<Admin />} />

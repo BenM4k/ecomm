@@ -33,7 +33,6 @@ const LogIn = () => {
                 });
 
                 const accessToken = response?.data.accessToken;
-                console.log(accessToken);
                 const roles = response?.data.roles;
                 const userInfo = response?.data.userInfo;
                 setAuth({ user, userInfo, roles, accessToken });

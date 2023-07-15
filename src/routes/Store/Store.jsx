@@ -8,7 +8,7 @@ import { addToCart } from '../../redux/slices/cart/cartSlice';
 
 const Store = () => {
     const dispatch = useDispatch();
-    const { products, categories } = useSelector((store) => store.product);
+    const { error, products, categories } = useSelector((store) => store.product);
     const mainVariant = {
         start: { opacity: 0 },
         end: {
@@ -39,52 +39,54 @@ const Store = () => {
                 ))}
             </ul>
             <h1>Our <span>Top Sales</span></h1>
-            <motion.ul
-                className='product-list'
-                variants={mainVariant}
-                initial='start'
-                animate='end'
-            >
-                {products?.map(product => (
-                    <motion.li
-                        key={product._id}
-                        className='product'
-                        variants={liVariant}
-                        initial="start"
-                        whileHover="hover"
-                    >
-                        <NavLink
-                            to={`/product/${product._id}`}
-                            className="product-link"
+            {error ? <h2 className='failed'>{error}</h2>
+                : <motion.ul
+                    className='product-list'
+                    variants={mainVariant}
+                    initial='start'
+                    animate='end'
+                >
+                    {products?.map(product => (
+                        <motion.li
+                            key={product._id}
+                            className='product'
+                            variants={liVariant}
                             initial="start"
-                            hover="hover"
+                            whileHover="hover"
                         >
-                            <motion.h2
-                                className='product-name'
+                            <NavLink
+                                to={`/product/${product._id}`}
+                                className="product-link"
+                                initial="start"
+                                hover="hover"
                             >
-                                {product.title}
-                            </motion.h2>
-                            <motion.img
-                                src={urlFor(product.imageurl).url()}
-                                alt={product.title}
-                                className='product-image'
-                            />
-                        </NavLink>
-                        <div className="product-footer">
-                            <button
-                                onClick={() => dispatch(addToCart(product))}
-                            >
-                                Add to cart
-                            </button>
-                            <motion.span
-                                className='product-price'
-                            >
-                                ${product.price}
-                            </motion.span>
-                        </div>
-                    </motion.li>
-                ))}
-            </motion.ul>
+                                <motion.h2
+                                    className='product-name'
+                                >
+                                    {product.title}
+                                </motion.h2>
+                                <motion.img
+                                    src={urlFor(product.imageurl).url()}
+                                    alt={product.title}
+                                    className='product-image'
+                                />
+                            </NavLink>
+                            <div className="product-footer">
+                                <button
+                                    onClick={() => dispatch(addToCart(product))}
+                                >
+                                    Add to cart
+                                </button>
+                                <motion.span
+                                    className='product-price'
+                                >
+                                    ${product.price}
+                                </motion.span>
+                            </div>
+                        </motion.li>
+                    ))}
+                </motion.ul>
+            }
         </motion.main>
     )
 }

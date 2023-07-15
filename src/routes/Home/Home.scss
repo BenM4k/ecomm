@@ -1,7 +1,14 @@
 .hero-banner {
     padding: 0 2rem;
     height: 90vh;
-    // background: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .failed,
+    .load {
+        color: #313bac;
+    }
 
     .splide {
         height: 100%;

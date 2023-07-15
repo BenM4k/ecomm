@@ -29,7 +29,7 @@ const PersistLogin = () => {
     return (
         <>
             {isLoading
-                ? <p>Loading...</p>
+                ? <div className="hero-banner"><h2 className="load">Loading...</h2></div>
                 : <Outlet />}
         </>
     )

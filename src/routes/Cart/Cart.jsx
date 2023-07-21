@@ -1,7 +1,7 @@
 import './Cart.scss';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { urlFor } from '../../Client';
+// import { urlFor } from '../../Client';
 import { AiFillCloseCircle, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { itemCountPlus, itemCountMinus } from '../../redux/slices/cart/cartSlice';
 import { removeToCart } from '../../redux/slices/cart/cartSlice';
@@ -19,42 +19,43 @@ const Cart = () => {
 
     return (
         <div className='cart-container'>
-            <ul className='cart-list'>
-                {cart?.map((product) => (
-                    <li key={product._id}>
-                        <button
-                            type='button'
-                            className='delete-cart-item'
-                            onClick={() => {
-                                dispatch(removeToCart(product));
-                            }}
-                        >
-                            <AiFillCloseCircle />
-                        </button>
-                        <img src={urlFor(product.imageurl).url()} alt={product.title} />
-                        <h3>{product.title}</h3>
-                        <p>${product.price}</p>
-                        <div className="item-count">
+            {cart.length ?
+                <ul className='cart-list'>
+                    {cart?.map((product) => (
+                        <li key={product._id}>
                             <button
-                                type="button"
-                                onClick={() => dispatch(itemCountMinus(product))}
+                                type='button'
+                                className='delete-cart-item'
+                                onClick={() => {
+                                    dispatch(removeToCart(product));
+                                }}
                             >
-                                <AiOutlineMinus />
+                                <AiFillCloseCircle />
                             </button>
-                            <span>{product.itemCount}</span>
-                            <button
-                                type="button"
-                                onClick={() => dispatch(itemCountPlus(product))}
-                            >
-                                <AiOutlinePlus />
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                            {/* <img src={urlFor(product.imageurl).url()} alt={product.title} /> */}
+                            <h3>{product.title}</h3>
+                            <p>${product.price}</p>
+                            <div className="item-count">
+                                <button
+                                    type="button"
+                                    onClick={() => dispatch(itemCountMinus(product))}
+                                >
+                                    <AiOutlineMinus />
+                                </button>
+                                <span>{product.itemCount}</span>
+                                <button
+                                    type="button"
+                                    onClick={() => dispatch(itemCountPlus(product))}
+                                >
+                                    <AiOutlinePlus />
+                                </button>
+                            </div>
+                        </li>
+                    ))}
+                </ul> : <h2>Your cart is empty</h2>}
 
-            <p>Total: <span>${total.toFixed(2)}</span></p>
-            <button type="button">
+            <p className='total'>Total: <span>${total.toFixed(2)}</span></p>
+            <button type="button" className='buy-now'>
                 {cart?.length
                     ? <NavLink to='/shipping'>Buy now</NavLink>
                     : < span />}

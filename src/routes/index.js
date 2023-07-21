@@ -9,3 +9,5 @@ export { default as Register } from './Register/Register';
 export { default as Store } from './Store/Store';
 export { default as Shipping } from './Shipping/Shipping';
 export { default as Cart } from './Cart/Cart';
+export { default as Category } from './Category/Category';
+export { default as Order } from './Order/Order';

@@ -1,33 +1,14 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { urlFor } from '../../Client';
+// import { urlFor } from '../../Client';
 import './Store.scss';
-import { addToCart } from '../../redux/slices/cart/cartSlice';
+import Pagineted from '../../components/Paginated/Pagineted';
 
 const Store = () => {
-    const dispatch = useDispatch();
-    const { error, products, categories } = useSelector((store) => store.product);
-    const mainVariant = {
-        start: { opacity: 0 },
-        end: {
-            opacity: 1,
-            transition: {
-                duration: 0.3,
-                delay: 0.3
-            }
-        }
-    }
-    const liVariant = {
-        start: { scale: 1 },
-        hover: {
-            scale: 1.1,
-            transition: {
-                duration: 0.4,
-            }
-        },
-    };
+    const { error, products } = useSelector((store) => store.product);
+    const categories = useSelector((store) => store.category);
 
     return (
         <motion.main
@@ -35,58 +16,17 @@ const Store = () => {
         >
             <ul className='categories'>
                 {categories?.map(category => (
-                    <li key={category.title}>{category.title}</li>
+                    <li key={category.title}>
+                        <NavLink to={`/category/${category.title}`}>
+                            {category.title}
+                        </NavLink>
+                    </li>
                 ))}
             </ul>
+            <input type='text' placeholder='search' />
             <h1>Our <span>Top Sales</span></h1>
             {error ? <h2 className='failed'>{error}</h2>
-                : <motion.ul
-                    className='product-list'
-                    variants={mainVariant}
-                    initial='start'
-                    animate='end'
-                >
-                    {products?.map(product => (
-                        <motion.li
-                            key={product._id}
-                            className='product'
-                            variants={liVariant}
-                            initial="start"
-                            whileHover="hover"
-                        >
-                            <NavLink
-                                to={`/product/${product._id}`}
-                                className="product-link"
-                                initial="start"
-                                hover="hover"
-                            >
-                                <motion.h2
-                                    className='product-name'
-                                >
-                                    {product.title}
-                                </motion.h2>
-                                <motion.img
-                                    src={urlFor(product.imageurl).url()}
-                                    alt={product.title}
-                                    className='product-image'
-                                />
-                            </NavLink>
-                            <div className="product-footer">
-                                <button
-                                    onClick={() => dispatch(addToCart(product))}
-                                >
-                                    Add to cart
-                                </button>
-                                <motion.span
-                                    className='product-price'
-                                >
-                                    ${product.price}
-                                </motion.span>
-                            </div>
-                        </motion.li>
-                    ))}
-                </motion.ul>
-            }
+                : <Pagineted items={products} itemsPerPage={8} />}
         </motion.main>
     )
 }

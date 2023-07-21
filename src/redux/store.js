@@ -4,6 +4,10 @@ import productSlice from './slices/products/productSlice';
 import userSlice from './slices/users/userSlice';
 import cartSlice from './slices/cart/cartSlice';
 import orderSlice from './slices/order/orderSlice';
+import bannerSlice from './slices/banners/banners';
+import categorySlice from './slices/category/category';
+import wishListSlice from './slices/wishList/wishList';
+
 
 const store = configureStore({
     reducer: {
@@ -11,6 +15,9 @@ const store = configureStore({
         user: userSlice,
         cart: cartSlice,
         order: orderSlice,
+        banner: bannerSlice,
+        category: categorySlice,
+        wishList: wishListSlice
     }
 })
 

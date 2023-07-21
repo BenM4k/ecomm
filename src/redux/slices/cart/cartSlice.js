@@ -20,10 +20,13 @@ const CartSlice = createSlice({
             const item = state.find((item) => item._id === action.payload._id);
             if (item.itemCount === 1) return;
             item.itemCount -= 1;
+        },
+        clearCart: (state) => {
+            return [];
         }
     },
 })
 
-export const { addToCart, removeToCart, itemCountMinus, itemCountPlus } = CartSlice.actions;
+export const { addToCart, removeToCart, itemCountMinus, itemCountPlus, clearCart } = CartSlice.actions;
 
 export default CartSlice.reducer;

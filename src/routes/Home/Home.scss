@@ -4,10 +4,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     .failed,
     .load {
         color: #313bac;
+    }
+
+    .circle {
+        position: absolute;
     }
 
     .splide {

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { addOrder } from '../../redux/slices/order/orderSlice'
+import { clearCart } from '../../redux/slices/cart/cartSlice'
 import Order from '../../models/orderModel';
 // import useAuth from '../../hooks/useAuth';
 // import './Shipping.scss';
@@ -10,6 +11,7 @@ import Order from '../../models/orderModel';
 const Shipping = () => {
     const dispatch = useDispatch();
     const cart = useSelector((store) => store.cart);
+    // const { auth } = useAuth();
 
     const now = new Date();
     const year = now.getFullYear();
@@ -19,7 +21,7 @@ const Shipping = () => {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    const time = `${year}-${month}-${day}-${hour}-${minutes}-${seconds}`;
+    const time = `${year}-${month}-${day} at ${hour}h-${minutes}m-${seconds}s`;
     //page control
     const [firstPage, setFirstPage] = useState(true);
     const [secondPage, setSecondPage] = useState(false);
@@ -52,7 +54,7 @@ const Shipping = () => {
 
     //set new Order
     const newOrder = new Order(
-        uuid(), 'Bee mak', cart, total, 'pending', time, shippingDetails, paymentMethod
+        uuid(), 'ben', cart, total, 'pending', time, shippingDetails, paymentMethod
     );
 
     const validateOrder = newOrder.validate();
@@ -71,6 +73,7 @@ const Shipping = () => {
                 <div className={firstPage ? "ship-address" : "ship-address hidden"} id='residence'>
                     <h2>Enter your shipping address</h2>
                     <select name="country" id="country" value={country} onChange={(e) => setCountry(e.target.value)}>
+                        <option value="" selected>Choose a country</option>
                         <option value="USA">USA</option>
                         <option value="CANADA">CANADA</option>
                         <option value="MEXICO">MEXICO</option>
@@ -157,7 +160,8 @@ const Shipping = () => {
                                 });
                             } else {
                                 console.log('Valid order');
-                                dispatch(addOrder(newOrder))
+                                dispatch(addOrder(newOrder));
+                                dispatch(clearCart());
                                 setThirdPage(false);
                             }
                         }}

@@ -1,3 +1,12 @@
+header {
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    --webkit-backdrop-filter: blur(4px);
+}
+
 nav {
     display: flex;
     align-items: center;
@@ -5,13 +14,17 @@ nav {
 
     max-width: 1080px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 1rem 0;
     font-weight: bolder;
     font-size: 1.2em;
 
     div {
         a {
-            color: #313bac;
+            color: #6b7688;
+
+            &:hover {
+                color: #313bac;
+            }
         }
     }
 
@@ -51,7 +64,11 @@ nav {
         flex: 1;
 
         a {
-            color: #313bac;
+            color: #6b7688;
+
+            &:hover {
+                color: #313bac;
+            }
         }
     }
 }

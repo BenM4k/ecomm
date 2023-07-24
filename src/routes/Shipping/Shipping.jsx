@@ -6,7 +6,7 @@ import { addOrder } from '../../redux/slices/order/orderSlice'
 import { clearCart } from '../../redux/slices/cart/cartSlice'
 import Order from '../../models/orderModel';
 // import useAuth from '../../hooks/useAuth';
-// import './Shipping.scss';
+import './Shipping.scss';
 
 const Shipping = () => {
     const dispatch = useDispatch();
@@ -22,10 +22,6 @@ const Shipping = () => {
     const seconds = now.getSeconds();
 
     const time = `${year}-${month}-${day} at ${hour}h-${minutes}m-${seconds}s`;
-    //page control
-    const [firstPage, setFirstPage] = useState(true);
-    const [secondPage, setSecondPage] = useState(false);
-    const [thirdPage, setThirdPage] = useState(false);
 
     //shipping address
     const [country, setCountry] = useState("");
@@ -64,13 +60,13 @@ const Shipping = () => {
             <div className="ship-header">
                 <div className="ship-line">
                     <div className='ship-location active' />
-                    <div className={!secondPage ? 'ship-location' : 'ship-location active'} />
-                    <div className={!thirdPage ? 'ship-location' : 'ship-location active'} />
+                    <div className={'ship-location'} />
+                    <div className={'ship-location'} />
                 </div>
             </div>
 
             <div className="ship-body">
-                <div className={firstPage ? "ship-address" : "ship-address hidden"} id='residence'>
+                <div className={"ship-address"} id='residence'>
                     <h2>Enter your shipping address</h2>
                     <select name="country" id="country" value={country} onChange={(e) => setCountry(e.target.value)}>
                         <option value="" selected>Choose a country</option>
@@ -96,15 +92,6 @@ const Shipping = () => {
                         >
                             <NavLink to='/cart'>Back</NavLink>
                         </button>
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setSecondPage(true);
-                                setFirstPage(false);
-                            }}
-                        >
-                            <NavLink to='#payment'>Continue to payment</NavLink>
-                        </button>
                     </div>
                 </div>
 
@@ -122,17 +109,12 @@ const Shipping = () => {
                     </div>
                     <button
                         type="button"
-                        onClick={() => {
-                            setFirstPage(true)
-                        }}
                     >
                         <NavLink to='#residence' />
                     </button>
                     <button
                         type="button"
-                        onClick={() => {
-                            setThirdPage(true);
-                        }}
+
                     >
                         <NavLink to='#confirm'>Continue to payment</NavLink>
                     </button>
@@ -143,9 +125,6 @@ const Shipping = () => {
                     <div className="items"></div>
                     <button
                         type="button"
-                        onClick={() => {
-                            setSecondPage(true);
-                        }}
                     >
                         <NavLink to='#payment' />
                     </button>
@@ -162,16 +141,11 @@ const Shipping = () => {
                                 console.log('Valid order');
                                 dispatch(addOrder(newOrder));
                                 dispatch(clearCart());
-                                setThirdPage(false);
                             }
                         }}
                     >
                         <NavLink to='#payed'>Confirm</NavLink>
                     </button>
-                </div>
-
-                <div className="payed" id="payed">
-                    <div className="confirm-button"></div>
                 </div>
 
                 <NavLink to='/admin'>admin</NavLink>

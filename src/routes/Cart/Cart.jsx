@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AiFillCloseCircle, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { itemCountPlus, itemCountMinus } from '../../redux/slices/cart/cartSlice';
 import { removeToCart } from '../../redux/slices/cart/cartSlice';
+import phone from '../../assets/pngimg.com - iphone_14_PNG24.png';
 
 const Cart = () => {
     const cart = useSelector((store) => store.cart);
@@ -32,13 +33,17 @@ const Cart = () => {
                             >
                                 <AiFillCloseCircle />
                             </button>
-                            {/* <img src={urlFor(product.imageurl).url()} alt={product.title} /> */}
+                            <img src={phone} alt={product.title} />
                             <h3>{product.title}</h3>
                             <p>${product.price}</p>
                             <div className="item-count">
                                 <button
                                     type="button"
-                                    onClick={() => dispatch(itemCountMinus(product))}
+                                    onClick={() => {
+                                        product.itemCount === 1 ?
+                                            dispatch(removeToCart(product))
+                                            : dispatch(itemCountMinus(product))
+                                    }}
                                 >
                                     <AiOutlineMinus />
                                 </button>

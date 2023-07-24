@@ -4,15 +4,40 @@ import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import UploadProduct from '../../components/UploadProduct';
 import { addCategory } from '../../redux/slices/category/category';
+import { addBanner } from '../../redux/slices/banners/banners';
 import Category from '../../models/categoryModel';
+import Banner from '../../models/bannerModel';
 import './Admin.scss';
+import photo from '../../assets/pexels-nappy-935985.jpg';
+import { FaEdit } from 'react-icons/fa';
+import { FiDelete } from 'react-icons/fi';
+import { NavLink } from 'react-router-dom';
 
 const Admin = () => {
     const dispatch = useDispatch();
     const axiosPrivate = useAxiosPrivate();
     const [users, setUsers] = useState();
+    const fakeUsers = [
+        {
+            firstname: "ben",
+        },
+        {
+            firstname: "Jane",
+        },
+        {
+            firstname: "Glenn",
+        },
+        {
+            firstname: "Mane",
+        },
+    ];
     const [cat, setCat] = useState("");
     const [categoryError, setCategoryError] = useState("");
+
+    //banner handler
+    const [bannerTitle, setBannerTitle] = useState("");
+    const [bannerDesc, setBannerDesc] = useState("");
+    const [bannerError, setBannerError] = useState("");
 
     const orders = useSelector((store) => store.order);
 
@@ -38,7 +63,7 @@ const Admin = () => {
             isMounted = false;
             controller.abort();
         }
-    }, [])
+    })
 
     const handleAddCategory = () => {
         const newCategory = new Category(uuid(), cat);
@@ -52,6 +77,22 @@ const Admin = () => {
         }
     }
 
+    const handleAddBanner = () => {
+        const newBanner = new Banner(bannerTitle, bannerDesc, photo);
+        const validateBanner = newBanner.validate();
+
+        if (validateBanner.length > 0) {
+            validateBanner.forEach((error) => {
+                setBannerError(error)
+            })
+        } else {
+            dispatch(addBanner(newBanner))
+            setBannerError("");
+            setBannerTitle("");
+            setBannerDesc("");
+            console.log("new banner created")
+        }
+    }
     return (
         <div className='admin-wrapper'>
             <div className="list-and-create-product">
@@ -60,9 +101,22 @@ const Admin = () => {
                     {users?.length
                         ? (
                             <ul>
-                                {users.map((user, i) => <li key={i}>{user?.firstname}</li>)}
+                                {users.map((user, i) => <li key={i}>
+                                    <h4>{user?.firstname}</h4>
+                                    <button><FiDelete /></button>
+                                    <button><FaEdit /></button>
+                                </li>)}
                             </ul>
-                        ) : <p>No users to display</p>}
+                        ) : (
+                            <ul>
+                                {fakeUsers.map((user, i) => <li key={i}>
+                                    <h4>{user?.firstname}</h4>
+                                    <button><FiDelete /></button>
+                                    <button><FaEdit /></button>
+                                </li>)}
+                            </ul>
+                        )
+                    }
                 </div>
                 <div>
                     <UploadProduct />
@@ -73,6 +127,16 @@ const Admin = () => {
                     <button type="button" onClick={handleAddCategory}>Add category</button>
                     <span style={{ color: 'red' }}>{categoryError}</span>
                 </div>
+
+                <div className="add-category">
+                    <h2>Add a banner</h2>
+                    <label>Banner header</label>
+                    <input type='text' value={bannerTitle} onChange={(e) => setBannerTitle(e.target.value)} />
+                    <label>Banner description</label>
+                    <input type='text' value={bannerDesc} onChange={(e) => setBannerDesc(e.target.value)} />
+                    <button type="button" onClick={handleAddBanner}>Add a banner</button>
+                    <span style={{ color: 'red' }}>{bannerError}</span>
+                </div>
             </div>
 
             <div className='users-orders'>
@@ -81,27 +145,23 @@ const Admin = () => {
                     <ul>
                         {orders.map((order) => (
                             <li key={order?.id} className='order-list'>
-                                <h3>User: {order.customerName}</h3>
-                                <p>Creation date: {order?.createdAt}</p>
-                                <p>Status: {order.status}</p>
-                                <p>Items : {order.items.length}</p>
-                                <ul>
-                                    {order.items.map(item => (
-                                        <li key={item._id}>
-                                            <h3>{item.title}</h3>
-                                            <p>{item.price}</p>
-                                            <p>Item count: {item.itemCount}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <p>Total: {order.total}</p>
-                                <p>Country: {order.shippingDetails[0]}</p>
-                                <p>Street: {order.shippingDetails[1]}</p>
-                                <p>Street Address: {order.shippingDetails[2]}</p>
-                                <p>Road: {order.shippingDetails[3]}</p>
-                                <p>Post Code: {order.shippingDetails[4]}</p>
-                                <br />
-                                <p>{order.total}</p>
+                                <div className="order-user flex-center">
+                                    <h4>User</h4>
+                                    <p>{order.customerName}</p>
+                                </div>
+                                <div className="order-id flex-center">
+                                    <h4>id</h4>
+                                    <NavLink to={`/order/${order.id}`}>{order.id}</NavLink>
+                                </div>
+                                <div className="order-status flex-center">
+                                    <h4>Status</h4>
+                                    <p>{order.status}</p>
+                                </div>
+                                <div className="order-total flex-center">
+                                    <h4>Total</h4>
+                                    <p>{order.total}</p>
+                                </div>
+                                <button><FiDelete /></button>
                             </li>
                         ))}
                     </ul>

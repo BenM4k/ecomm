@@ -14,17 +14,24 @@ const Store = () => {
         <motion.main
             className='main-container'
         >
-            <ul className='categories'>
-                {categories?.map(category => (
-                    <li key={category.title}>
-                        <NavLink to={`/category/${category.title}`}>
-                            {category.title}
+            <div className="store-header">
+                <input type='text' placeholder='search' className='search' />
+                <ul className='categories'>
+                    <li>
+                        <NavLink to='/store'>
+                            All
                         </NavLink>
                     </li>
-                ))}
-            </ul>
-            <input type='text' placeholder='search' />
-            <h1>Our <span>Top Sales</span></h1>
+                    {categories?.map(category => (
+                        <li key={category.title}>
+                            <NavLink to={`/category/${category.title}`}>
+                                {category.title}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <h1 className='title'>Our <span>Top Sales</span></h1>
             {error ? <h2 className='failed'>{error}</h2>
                 : <Pagineted items={products} itemsPerPage={8} />}
         </motion.main>

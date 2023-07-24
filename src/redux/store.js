@@ -7,6 +7,8 @@ import orderSlice from './slices/order/orderSlice';
 import bannerSlice from './slices/banners/banners';
 import categorySlice from './slices/category/category';
 import wishListSlice from './slices/wishList/wishList';
+import testimonialSlice from './slices/testimonials/testimonials';
+
 
 
 const store = configureStore({
@@ -17,7 +19,8 @@ const store = configureStore({
         order: orderSlice,
         banner: bannerSlice,
         category: categorySlice,
-        wishList: wishListSlice
+        wishList: wishListSlice,
+        testimonial: testimonialSlice,
     }
 })
 

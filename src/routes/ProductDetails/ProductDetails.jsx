@@ -57,13 +57,18 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="suggested-products">
+
+      <div className="suggested-products flex-center">
         <h2>In the same category</h2>
         <ul>
-          {SuggestedProducts.map((product) => (
-            <li key={product._id}>
-              <NavLink to={`/product/${product._id}`}>
-                <h4>{product.title}</h4>
+          {SuggestedProducts.filter((prod) => prod._id !== product._id).map((product) => (
+            <li key={product._id} >
+              <NavLink to={`/product/${product._id}`} className='flex-center'>
+                <img src={phone} alt={product.title} />
+                <div className="suggested-details flex-center">
+                  <h4>{product.title}</h4>
+                  <p>${product.price}</p>
+                </div>
               </NavLink>
             </li>
           ))}

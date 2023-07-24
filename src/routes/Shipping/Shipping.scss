@@ -1,9 +1,8 @@
 .ship-container {
-    height: 100%;
     display: flex;
     flex-direction: column;
     max-width: 480px;
-    margin: auto;
+    margin: 4.2rem auto;
 
     .ship-header {
         display: flex;
@@ -120,12 +119,6 @@
             &.hidden {
                 display: none;
             }
-        }
-
-        .pay-method {}
-
-        .confirm {
-            display: none;
         }
     }
 }

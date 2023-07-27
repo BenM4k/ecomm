@@ -1,0 +1,40 @@
+footer {
+    display: flex;
+    max-width: 1080px;
+    gap: 10px;
+    margin: 9rem auto 2rem;
+
+    .us {
+        flex: 1;
+    }
+
+    .partners {
+        flex: 1;
+
+        ul {
+            list-style-type: none;
+
+            li {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .useful-links {
+        flex: 1;
+
+        ul {
+            list-style-type: none;
+        }
+    }
+
+    .contact {
+        flex: 1.5;
+
+        ul {
+            display: flex;
+            list-style-type: none;
+            gap: 10px;
+        }
+    }
+}

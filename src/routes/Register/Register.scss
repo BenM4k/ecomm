@@ -1,0 +1,119 @@
+.register-container {
+    max-width: 1080px;
+    max-height: 700px;
+    margin: 9rem auto;
+    display: flex;
+    box-shadow: 0px 1px 9px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+
+    .register-img-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        border-right: 5px solid #e4e4e4;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .register-form {
+        overflow: hidden;
+        width: 100%;
+        flex: 1;
+
+        h1 {
+            padding-top: 1rem;
+        }
+
+        .errmsg {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 5px;
+            background-color: rgb(223, 91, 91);
+            color: #fff;
+            text-align: center;
+        }
+
+        form {
+            padding: 3rem 6rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            label {
+                font-weight: 600;
+                text-transform: capitalize;
+                margin: .4rem 0
+            }
+
+            input {
+                padding: .6rem;
+                border: none;
+                border-radius: 5px;
+                margin: .2rem 0;
+                background-color: #e4e4e4;
+                font-size: 1rem;
+            }
+
+            .instructions {
+                margin: .3rem 0;
+                background-color: #030303;
+                padding: .4rem;
+                border-radius: 10px;
+                color: #fff;
+
+                svg {
+                    margin-right: 5px;
+                }
+            }
+
+            .offscreen {
+                position: absolute;
+                right: -50000px;
+            }
+
+            .valid {
+                color: green;
+                margin-left: 5px;
+                font-weight: 600;
+            }
+
+            .invalid {
+                margin-left: 5px;
+                color: red;
+            }
+
+            .hide {
+                display: none;
+            }
+
+            button {
+                border: none;
+                margin: 1rem 0;
+                padding: .6rem;
+                border-radius: 5px;
+                width: 25%;
+                background-color: #313bac;
+                color: #fff;
+                cursor: pointer;
+
+                &:disabled {
+                    color: #030303;
+                    background-color: #e4e4e4;
+                    cursor: not-allowed;
+                }
+            }
+
+            .line {
+                a {
+                    // font-weight: bold;
+                    text-decoration: underline;
+                    color: #313bac;
+                }
+            }
+        }
+    }
+}

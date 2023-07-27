@@ -8,9 +8,17 @@ const Category = () => {
     const { category } = useParams();
     const filteredProducts = products.filter(product => product.category === category);
     return (
-        <div>
-            <Pagineted items={filteredProducts} itemsPerPage={3} />
-        </div>
+        <>
+            {filteredProducts.length === 0 ? <h2 style={{
+                margin: "15rem 3rem",
+                textAlign: "center"
+            }}>No products for this category</h2> :
+                <div style={{
+                    marginTop: "10rem"
+                }}>
+                    <Pagineted items={filteredProducts} itemsPerPage={3} />
+                </div>}
+        </>
     )
 }
 

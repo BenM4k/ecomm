@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/slices/users/userSlice';
@@ -13,9 +13,20 @@ const LogIn = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
+    const userRef = useRef();
+    const errRef = useRef();
+
     const [pwd, setPwd] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
+
+    // useEffect(() => {
+    //     userRef.current.focus();
+    // }, [])
+
+    useEffect(() => {
+        setError('');
+    }, [email, pwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,28 +66,51 @@ const LogIn = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input
-                    type="email"
-                    id='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <label htmlFor="password">password</label>
-                <input
-                    type="password"
-                    id='password'
-                    value={pwd}
-                    onChange={(e) => setPwd(e.target.value)}
-                    required
-                />
-                <button type="submit">submit</button>
-                <p>{error}</p>
-                <NavLink to='/sign-up'>Sign up</NavLink>
-            </form>
+        <div className='register-container'>
+            <div className="register-img-placeholder flex-center">
+                <h1>Image placeholder</h1>
+            </div>
+            <div className="register-form">
+                <p
+                    ref={errRef}
+                    className={error ? "errmsg" : "offscreen"}
+                    aria-live='assertive'
+                >
+                    {error}
+                </p>
+
+                <h1 className='title'>Sign In</h1>
+
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="email">email</label>
+                    <input
+                        type="email"
+                        id='email'
+                        ref={userRef}
+                        autoComplete='off'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+
+                    <label htmlFor="password">password</label>
+                    <input
+                        type="password"
+                        id='password'
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Log in</button>
+
+                    <p>
+                        Need an account ? <br />
+                        <div className="line">
+                            <NavLink to='/sign-up'>Sign up</NavLink>
+                        </div>
+                    </p>
+                </form>
+            </div>
         </div>
     )
 }

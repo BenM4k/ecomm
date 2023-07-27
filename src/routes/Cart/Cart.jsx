@@ -59,7 +59,9 @@ const Cart = () => {
                     ))}
                 </ul> : <h2>Your cart is empty</h2>}
 
-            <p className='total'>Total: <span>${total.toFixed(2)}</span></p>
+            <p className='total'>{cart?.length
+                ? <p>Total : <span>${total.toFixed(2)}</span></p>
+                : <soan />}</p>
             <button type="button" className='buy-now'>
                 {cart?.length
                     ? <NavLink to='/shipping'>Buy now</NavLink>

@@ -1,69 +1,18 @@
 .ship-container {
     display: flex;
     flex-direction: column;
-    max-width: 480px;
-    margin: 4.2rem auto;
-
-    .ship-header {
-        display: flex;
-
-        .ship-line {
-            height: 10px;
-            width: 260px;
-            margin: auto;
-            box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1),
-                2px 1px 3px rgba(0, 0, 0, 0.2);
-            position: relative;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            .ship-location {
-                position: absolute;
-                width: 30px;
-                height: 30px;
-                background-color: #edf2f8;
-                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3),
-                    -2px -2px 2px rgba(255, 255, 255, 0.8);
-                border-radius: 50%;
-                z-index: 1;
-
-
-                &:nth-child(1) {
-                    left: -27px;
-
-                    &.active {
-                        box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-                    }
-                }
-
-                &:nth-child(2) {
-                    left: 45%;
-
-                    &.active {
-                        box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-                    }
-                }
-
-                &:nth-child(3) {
-                    right: -27px;
-
-                    &.active {
-                        box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-                    }
-                }
-            }
-        }
-    }
+    max-width: 1080px;
+    margin: 9rem auto;
 
     .ship-body {
         display: flex;
+        gap: 50px;
         width: 100%;
         margin-top: 2em;
 
 
         .ship-address {
+            flex: 1;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -91,33 +40,59 @@
                     -2px -2px 4px rgba(255, 255, 255, 0.8);
             }
 
-            .ship-btns {
-                button {
-                    border: none;
-                    margin-top: 1rem;
+            button {
+                margin-top: 25px;
+            }
+        }
 
-                    a {
-                        border-radius: 20px;
-                        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
-                            -2px -2px 4px rgba(255, 255, 255, 0.8);
-                        padding: .8rem;
-                        color: #313bac;
+        .pay-method {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
 
-                        &:hover {
-                            background-color: #313bac;
-                            color: #fff;
-                        }
-                    }
-                }
-
-                .back {
-                    border-radius: 50%;
-                    margin-right: 2rem;
-                }
+            input {
+                margin-top: 10px;
+                border-radius: 20px;
+                padding: .6rem;
+                border: none;
+                box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.5),
+                    1px 1px 2px rgba(0, 0, 0, 0.5);
+                outline: none;
+                color: gray;
             }
 
-            &.hidden {
-                display: none;
+            .card {
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .bic-card {
+                margin-top: 30px;
+                display: flex;
+                flex-direction: column;
+                gap: 50px;
+            }
+        }
+
+        button {
+            border: none;
+            margin-top: 1rem;
+
+            a {
+                border-radius: 20px;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+                    -2px -2px 4px rgba(255, 255, 255, 0.8);
+                padding: .8rem;
+                color: #313bac;
+
+                &:hover {
+                    background-color: #313bac;
+                    color: #fff;
+                }
             }
         }
     }

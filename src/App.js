@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Layout from './components/Layout/Layout';
-import { Home, Login, Register, NotFound, ProductDetails, Unauthorized, User, Admin, Shipping, Store, Cart, Category, Order } from './routes';
+import { Home, Login, Register, NotFound, ProductDetails, Unauthorized, User, Admin, Shipping, Store, Cart, Category, Order, AllCat } from './routes';
 // import RequireAuth from './components/RequireAuth';
 // import PersistLogin from './components/PersistLogin';
 import { getProducts } from './redux/slices/products/productSlice';
@@ -32,6 +32,7 @@ const App = () => {
         <Route path='*' element={<NotFound />} />
         <Route path='/product/:id' element={<ProductDetails />} />
         <Route path='/category/:category/' element={<Category />} />
+        <Route path='/category' element={<AllCat />} />
         <Route path='/order/:id/' element={<Order />} />
         <Route path='/sign-in' element={<Login />} />
         <Route path='/sign-up' element={<Register />} />

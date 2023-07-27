@@ -9,6 +9,7 @@ import Pagineted from '../../components/Paginated/Pagineted';
 const Store = () => {
     const { error, products } = useSelector((store) => store.product);
     const categories = useSelector((store) => store.category);
+    const storecat = categories.slice(0, 5);
 
     return (
         <motion.main
@@ -18,11 +19,11 @@ const Store = () => {
                 <input type='text' placeholder='search' className='search' />
                 <ul className='categories'>
                     <li>
-                        <NavLink to='/store'>
+                        <NavLink to='/category'>
                             All
                         </NavLink>
                     </li>
-                    {categories?.map(category => (
+                    {storecat?.map(category => (
                         <li key={category.title}>
                             <NavLink to={`/category/${category.title}`}>
                                 {category.title}

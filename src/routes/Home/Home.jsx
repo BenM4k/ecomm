@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-      <section className='hero-banner'>
+      <section className='hero-banner section'>
         {error ? <h2 className='failed'>{error}</h2>
           : loadingProducts ? <h1 className='load'>Loading...</h1>
             : <>
@@ -63,7 +63,7 @@ const Home = () => {
         }
       </section>
 
-      <section className="home-categories">
+      <section className="home-categories section">
         <ul className='flex-center'>
           {showCategories.map((category) => (
             <li key={category._id} >
@@ -76,7 +76,7 @@ const Home = () => {
         </ul>
       </section>
 
-      <section className='shop-with-us'>
+      <section className='shop-with-us section'>
         <h2 className='title'>Why Shop <span>with us</span></h2>
         <ul className='flex-center'>
           <li>
@@ -94,13 +94,13 @@ const Home = () => {
         </ul>
       </section>
 
-      <section className="latest">
+      <section className="latest section">
         <h2 className='title latest-title'>Latest <span>products</span></h2>
         <PaginetedHome items={products} itemsPerPage={8} />
       </section>
 
 
-      <section className='testimonial flex-center'>
+      <section className='testimonial flex-center section'>
         <h2 className='title test'>Testimonials</h2>
 
         <div className="app__testimonial-item flex-center">

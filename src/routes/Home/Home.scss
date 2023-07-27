@@ -1,4 +1,4 @@
-section {
+.section {
     width: 1080px;
     height: 70vh;
     margin: 0 auto;
@@ -128,10 +128,10 @@ section {
             flex: 1;
             height: 250px;
             object-fit: cover;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(1px);
-            box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
 
             a {
@@ -177,10 +177,10 @@ section {
             gap: 30px;
             list-style-type: none;
 
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(1px);
-            box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             flex: 1;
             height: 250px;
@@ -226,8 +226,8 @@ section {
     }
 
     .app__testimonial-item {
+        background-color: #ffffff;
         min-height: 320px;
-        background-color: var(--white-color);
         display: flex;
         padding: 2rem;
         border-radius: 15px;

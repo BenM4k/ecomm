@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { useSelector, useDispatch } from 'react-redux';
-import { v4 as uuid } from 'uuid';
 import UploadProduct from '../../components/UploadProduct';
 import { addCategory } from '../../redux/slices/category/category';
 import { addBanner } from '../../redux/slices/banners/banners';
@@ -32,6 +31,7 @@ const Admin = () => {
         },
     ];
     const [cat, setCat] = useState("");
+    const [catDesc, setCatDesc] = useState("");
     const [categoryError, setCategoryError] = useState("");
 
     //banner handler
@@ -66,7 +66,7 @@ const Admin = () => {
     })
 
     const handleAddCategory = () => {
-        const newCategory = new Category(uuid(), cat);
+        const newCategory = new Category(cat, catDesc);
         const validatedCategory = newCategory.validate();
         if (validatedCategory.length > 0) {
             setCategoryError(validatedCategory[0])
@@ -74,6 +74,7 @@ const Admin = () => {
             dispatch(addCategory(newCategory))
             setCategoryError("");
             setCat("");
+            setCatDesc("");
         }
     }
 
@@ -123,7 +124,10 @@ const Admin = () => {
                 </div>
                 <div className="add-category">
                     <h2>Add a category</h2>
+                    <label htmlFor="">Title:</label>
                     <input type='text' value={cat} onChange={(e) => setCat(e.target.value)} />
+                    <label htmlFor="">Description:</label>
+                    <input type='text' value={catDesc} onChange={(e) => setCatDesc(e.target.value)} />
                     <button type="button" onClick={handleAddCategory}>Add category</button>
                     <span style={{ color: 'red' }}>{categoryError}</span>
                 </div>

@@ -11,3 +11,4 @@ export { default as Shipping } from './Shipping/Shipping';
 export { default as Cart } from './Cart/Cart';
 export { default as Category } from './Category/Category';
 export { default as Order } from './Order/Order';
+export { default as AllCat } from './AllCat/Allcat';

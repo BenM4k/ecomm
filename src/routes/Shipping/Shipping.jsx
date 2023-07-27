@@ -57,13 +57,6 @@ const Shipping = () => {
 
     return (
         <div className='ship-container'>
-            <div className="ship-header">
-                <div className="ship-line">
-                    <div className='ship-location active' />
-                    <div className={'ship-location'} />
-                    <div className={'ship-location'} />
-                </div>
-            </div>
 
             <div className="ship-body">
                 <div className={"ship-address"} id='residence'>
@@ -98,7 +91,14 @@ const Shipping = () => {
                 <div className="pay-method" id='payment'>
                     <h2>Select your payment method</h2>
                     <div className="card">
-                        <input type="checkbox" name="visa" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} /> visa
+                        <label htmlFor="visa">Visa</label>
+                        <input type="checkbox" name="visa" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
+                        <label htmlFor="mastercard">Mastercard</label>
+                        <input type="checkbox" name="mastercard" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
+                        <label htmlFor="paypal">Paypal</label>
+                        <input type="checkbox" name="paypal" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
+                        <label htmlFor="stripe">Stripe</label>
+                        <input type="checkbox" name="stripe" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
 
                     </div>
                     <div className="bic-card">
@@ -107,27 +107,6 @@ const Shipping = () => {
                         <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} />
                         <input type="text" value={cardDate} onChange={(e) => setCardDate(e.target.value)} />
                     </div>
-                    <button
-                        type="button"
-                    >
-                        <NavLink to='#residence' />
-                    </button>
-                    <button
-                        type="button"
-
-                    >
-                        <NavLink to='#confirm'>Continue to payment</NavLink>
-                    </button>
-                </div>
-
-                <div className="confirm" id='confirm'>
-                    <div className="datas"></div>
-                    <div className="items"></div>
-                    <button
-                        type="button"
-                    >
-                        <NavLink to='#payment' />
-                    </button>
                     <button
                         type="button"
                         onClick={() => {
@@ -147,8 +126,6 @@ const Shipping = () => {
                         <NavLink to='#payed'>Confirm</NavLink>
                     </button>
                 </div>
-
-                <NavLink to='/admin'>admin</NavLink>
             </div>
         </div>
     )

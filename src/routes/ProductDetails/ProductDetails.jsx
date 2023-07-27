@@ -65,7 +65,7 @@ const ProductDetails = () => {
             <li key={product._id} >
               <NavLink to={`/product/${product._id}`} className='flex-center'>
                 <img src={phone} alt={product.title} />
-                <div className="suggested-details flex-center">
+                <div className="suggested-details">
                   <h4>{product.title}</h4>
                   <p>${product.price}</p>
                 </div>

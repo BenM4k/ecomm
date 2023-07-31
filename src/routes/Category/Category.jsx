@@ -14,7 +14,7 @@ const Category = () => {
                 textAlign: "center"
             }}>No products for this category</h2> :
                 <div style={{
-                    marginTop: "10rem"
+                    margin: "10rem 0"
                 }}>
                     <Pagineted items={filteredProducts} itemsPerPage={3} />
                 </div>}

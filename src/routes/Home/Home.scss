@@ -118,11 +118,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 
     ul {
         list-style-type: none;
         gap: 30px;
         width: 100%;
+        overflow: hidden;
 
         li {
             flex: 1;
@@ -212,7 +214,7 @@
 }
 
 .testimonial {
-    margin-top: 6rem;
+    margin: 6rem auto;
     flex-direction: column;
 
     h2 {

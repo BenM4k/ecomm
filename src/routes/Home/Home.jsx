@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import { TbTruckDelivery } from 'react-icons/tb';
 import PaginetedHome from '../../components/PaginatedHome/PaginetedHome';
@@ -8,6 +9,45 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 
 import './Home.scss';
 import '@splidejs/react-splide/css';
+
+const displayVariant = {
+  start: { opacity: 0 },
+  end: {
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+}
+const parentVariant = {
+  start: {
+    opacity: 0,
+  },
+  end: {
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      staggerChildren: 0.2,
+    }
+  }
+}
+
+const childVariant = {
+  start: {
+    opacity: 0,
+    x: '-20px'
+  },
+  end: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: 'easeIn',
+      type: 'spring',
+      stiffness: 60,
+    }
+  }
+}
+
 
 const Home = () => {
   const { error, loadingProducts, products } = useSelector((store) => store.product);
@@ -64,46 +104,68 @@ const Home = () => {
       </section>
 
       <section className="home-categories section">
-        <ul className='flex-center'>
+        <motion.ul
+          variants={parentVariant}
+          initial="start"
+          whileInView="end"
+          className='flex-center'
+        >
           {showCategories.map((category) => (
-            <li key={category._id} >
+            <motion.li key={category._id} variants={childVariant}>
               <NavLink to={`/category/${category.title}`} className='flex-center'>
                 <h2>{category.title}</h2>
                 <p>{category.desc}</p>
               </NavLink>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </section>
 
       <section className='shop-with-us section'>
         <h2 className='title'>Why Shop <span>with us</span></h2>
-        <ul className='flex-center'>
-          <li>
+        <motion.ul
+          className='flex-center'
+          variants={parentVariant}
+          initial="start"
+          whileInView="end"
+        >
+          <motion.li variants={childVariant}>
             <TbTruckDelivery />
             <p>Fast delivery</p>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={childVariant}>
             <TbTruckDelivery />
             <p>Best quality</p>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={childVariant}>
             <TbTruckDelivery />
             <p>Free shipping</p>
-          </li>
-        </ul>
+          </motion.li>
+        </motion.ul>
       </section>
 
-      <section className="latest section">
+      <motion.section
+        className="latest section"
+
+      >
         <h2 className='title latest-title'>Latest <span>products</span></h2>
-        <PaginetedHome items={products} itemsPerPage={8} />
-      </section>
+        <motion.div
+          variants={displayVariant}
+          initial='start'
+          whileInView="end"
+        >
+          <PaginetedHome items={products} itemsPerPage={8} />
+        </motion.div>
+      </motion.section>
 
 
       <section className='testimonial flex-center section'>
         <h2 className='title test'>Testimonials</h2>
 
-        <div className="app__testimonial-item flex-center">
+        <motion.div className="app__testimonial-item flex-center"
+          variants={displayVariant}
+          initial='start'
+          whileInView="end">
           <img src={test.img} alt="testimonial" />
           <div className="app__testimonial-content">
             <p className="p-text">{test?.feedback}</p>
@@ -112,7 +174,7 @@ const Home = () => {
               <h5 className="p-text">{test?.company}</h5>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="app__testimonial-btns flex-center">
           <div className="flex-center" onClick={() => handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)}>

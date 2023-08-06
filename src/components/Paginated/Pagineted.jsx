@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { addToCart } from '../../redux/slices/cart/cartSlice';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import phone from '../../assets/pngimg.com - iphone_14_PNG24.png';
 import './Paginated.scss';
+import { TbH1 } from "react-icons/tb";
 
 const Pagineted = ({ items, itemsPerPage }) => {
     const dispatch = useDispatch();
+    const { query } = useSelector((store) => store.search);
     const totalPages = Math.ceil(items.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentItems = items.slice(startIndex, endIndex);
+    const searchedItems = query ? items.filter((item) => item.title.toLowerCase().includes(query)) : items;
+    const currentItems = searchedItems.slice(startIndex, endIndex);
 
     const goToPage = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -20,7 +23,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
     return (
         <div className="main-container">
             <ul className="product-list">
-                {currentItems.map((item) => (
+                {currentItems.length ? currentItems.map((item) => (
                     <li
                         key={item._id}
                         className='product'
@@ -53,7 +56,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
                             </span>
                         </div>
                     </li>
-                ))}
+                )) : <h2>No items</h2>}
             </ul>
 
             <div className="page-numbers">

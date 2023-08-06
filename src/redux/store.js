@@ -9,6 +9,7 @@ import categorySlice from './slices/category/category';
 import wishListSlice from './slices/wishList/wishList';
 import testimonialSlice from './slices/testimonials/testimonials';
 import modalSlice from './slices/modals/modals';
+import searchSlice from './slices/search/searchSlice';
 
 const store = configureStore({
     reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
         wishList: wishListSlice,
         testimonial: testimonialSlice,
         modal: modalSlice,
+        search: searchSlice,
     }
 })
 

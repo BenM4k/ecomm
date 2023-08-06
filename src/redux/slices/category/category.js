@@ -43,7 +43,6 @@ const categorySlice = createSlice({
     ],
     reducers: {
         addCategory: (state, action) => {
-            console.log(action.payload)
             const newCAt = {
                 _id: uuid(),
                 title: action.payload.title,

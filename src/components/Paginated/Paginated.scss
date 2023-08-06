@@ -5,6 +5,7 @@
     flex-direction: column;
     max-width: 1080px;
     margin: 0 auto 3rem;
+    min-height: 650px;
 
     h1 {
         font-size: 3em;
@@ -101,6 +102,7 @@
     .page-numbers {
         display: flex;
         gap: 10px;
+        margin-top: auto;
 
         button {
             background-color: #313bac;

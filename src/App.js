@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import Layout from './components/Layout/Layout';
 import { Home, Login, Register, NotFound, ProductDetails, Unauthorized, User, Admin, Shipping, Store, Cart, Category, Order, AllCat } from './routes';
-import { toggleWelcome } from './redux/slices/modals/modals';
+// import { toggleWelcome } from './redux/slices/modals/modals';
 // import RequireAuth from './components/RequireAuth';
 // import PersistLogin from './components/PersistLogin';
 // import { getProducts } from './redux/slices/products/productSlice';
@@ -16,15 +16,8 @@ import { toggleWelcome } from './redux/slices/modals/modals';
 // }
 
 const App = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(toggleWelcome());
-
-    setTimeout(() => {
-      dispatch(toggleWelcome());
-    }, 20000)
-  }, [])
   // useEffect(() => {
   //   dispatch(getProducts());
   //   dispatch(getCategory());

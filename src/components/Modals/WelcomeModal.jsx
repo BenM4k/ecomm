@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 const WelcomeModal = () => {
     const { welcomeModal } = useSelector((store) => store.modal);
-    console.log(welcomeModal)
     const user = "Ben";
     return (
         <>

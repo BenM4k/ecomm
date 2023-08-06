@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 // import useAuth from '../hooks/useAuth';
 
-import Product from '../models/productModel';
+import Product from '../../models/productModel';
 
 const UploadProduct = () => {
     const categories = useSelector((store) => store.category);

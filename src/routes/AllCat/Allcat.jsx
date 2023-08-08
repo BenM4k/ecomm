@@ -12,7 +12,7 @@ const Allcat = () => {
             <NavLink to="/store" className="back-to-store">Go to store</NavLink>
             <ul>
                 {categories.map((category) => (
-                    <li key={category.id}>
+                    <li key={category._id}>
                         <NavLink to={`/category/${category.title}`} className='flex-center'>
                             <h2>{category.title}</h2>
                             <p>{category.desc}</p>

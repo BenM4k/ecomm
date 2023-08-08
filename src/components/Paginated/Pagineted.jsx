@@ -4,7 +4,6 @@ import { addToCart } from '../../redux/slices/cart/cartSlice';
 import { useDispatch, useSelector } from "react-redux";
 import phone from '../../assets/pngimg.com - iphone_14_PNG24.png';
 import './Paginated.scss';
-import { TbH1 } from "react-icons/tb";
 
 const Pagineted = ({ items, itemsPerPage }) => {
     const dispatch = useDispatch();

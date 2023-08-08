@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toggleEditBanner, toggleEditCategory } from '../../redux/slices/modals/modals';
+import { editBanner, deleteBanner } from '../../redux/slices/banners/banners';
 import UploadProduct from '../../components/Add/UploadProduct';
 import AddCategory from '../../components/Add/addCategory';
 import AddBanner from '../../components/Add/AddBanner';
+import EditBanner from '../../components/Modals/EditBanner';
+import { editCategory, deleteCategory } from '../../redux/slices/category/category';
+import EditCategory from '../../components/Modals/EditCategory';
 import { deleteUser } from '../../redux/slices/users/userSlice';
 import './Admin.scss';
 import { FaEdit, FaUser } from 'react-icons/fa';
@@ -25,6 +30,11 @@ const Admin = () => {
     const handleDeleteUser = (id) => {
         if (!id) return;
         dispatch(deleteUser(id));
+    }
+
+    const handleEditCategory = (id) => {
+        dispatch(toggleEditCategory());
+        dispatch(editCategory(id));
     }
 
     const handleDisplay = (category) => {
@@ -98,8 +108,8 @@ const Admin = () => {
                                 <ul>
                                     {users.map((user, i) => <li key={i}>
                                         <h4>{user?.firstname}</h4>
-                                        <button onClick={() => handleDeleteUser(user.id)}><FiDelete /></button>
-                                        <button><FaEdit /></button>
+                                        <button><FiDelete /></button>
+                                        <button onClick={() => handleDeleteUser(user.id)}><FaEdit /></button>
                                     </li>)}
                                 </ul>
                             ) : <p>No users to display</p>
@@ -121,8 +131,13 @@ const Admin = () => {
                                 <li key={category._id}>
                                     <h3>{category.title}</h3>
                                     <div className="buttons">
-                                        <button><FiDelete /></button>
-                                        <button><FaEdit /></button>
+                                        <button onClick={() => {
+                                            dispatch(deleteCategory(category._id));
+                                        }}><FiDelete /></button>
+                                        <button onClick={() => handleEditCategory(category._id)}><FaEdit /></button>
+                                    </div>
+                                    <div className="">
+                                        <EditCategory category={category} />
                                     </div>
                                 </li>
                             ))}
@@ -145,8 +160,16 @@ const Admin = () => {
                                         <p>{banner.desc}</p>
                                     </div>
                                     <div className="buttons">
-                                        <button><FiDelete /></button>
-                                        <button><FaEdit /></button>
+                                        <button onClick={() => {
+                                            dispatch(deleteBanner(banner.id));
+                                        }}><FiDelete /></button>
+                                        <button onClick={() => {
+                                            dispatch(editBanner(banner.id));
+                                            dispatch(toggleEditBanner());
+                                        }}><FaEdit /></button>
+                                    </div>
+                                    <div className="">
+                                        <EditBanner />
                                     </div>
                                 </li>
                             ))}

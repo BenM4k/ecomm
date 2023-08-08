@@ -144,6 +144,14 @@ const initialState = {
 const ProductSlice = createSlice({
     name: 'product',
     initialState,
+    reducers: {
+        updateProductCategory: (state, action) => {
+            const newList = state.products.filter(p => p.category === action.payload.prev);
+            newList.forEach(p => {
+                p.category = action.payload.new;
+            })
+        }
+    },
     extraReducers: {
         // [getProducts.pending]: (state) => {
         //     state.productLoading = true;
@@ -156,5 +164,7 @@ const ProductSlice = createSlice({
         // }
     }
 });
+
+export const { updateProductCategory } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

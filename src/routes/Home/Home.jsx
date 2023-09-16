@@ -87,6 +87,9 @@ const Home = () => {
                             <div className="blur">
                               <h1>{item.title}</h1>
                               <p>{item.desc}</p>
+                              <button type='button'>
+                                <NavLink to='store'>Shop with us</NavLink>
+                              </button>
                             </div>
                             <img src={item.img} alt={`banner-${index}`} />
                           </div>

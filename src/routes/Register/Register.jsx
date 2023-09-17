@@ -94,7 +94,7 @@ const Register = () => {
     return (
         <div className="register-container">
             <div className='register-img-placeholder'>
-                <img src={image} alt="register" />
+                <img src={image} alt="register" loading='lazy'/>
             </div>
 
             <div className='register-form'>

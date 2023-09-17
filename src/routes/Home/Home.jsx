@@ -51,6 +51,7 @@ const childVariant = {
 
 const Home = () => {
   const { error, loadingProducts, products } = useSelector((store) => store.product);
+  const filteredProds = products.slice(1, 9);
   const categories = useSelector((store) => store.category);
   const testimonials = useSelector((store) => store.testimonial)
   const showCategories = categories.slice(1, 5);
@@ -91,7 +92,7 @@ const Home = () => {
                                 <NavLink to='store'>Shop with us</NavLink>
                               </button>
                             </div>
-                            <img src={item.img} alt={`banner-${index}`} />
+                            <img src={item.img} alt={`banner-${index}`} loading='lazy'/>
                           </div>
                         </div>
                       </SplideSlide>
@@ -157,7 +158,7 @@ const Home = () => {
           initial='start'
           whileInView="end"
         >
-          <PaginetedHome items={products} itemsPerPage={8} />
+          <PaginetedHome items={filteredProds} itemsPerPage={8} />
         </motion.div>
       </motion.section>
 
@@ -169,7 +170,7 @@ const Home = () => {
           variants={displayVariant}
           initial='start'
           whileInView="end">
-          <img src={test.img} alt="testimonial" />
+          <img src={test.img} alt="testimonial" loading='lazy'/>
           <div className="app__testimonial-content">
             <p className="p-text">{test?.feedback}</p>
             <div className="">

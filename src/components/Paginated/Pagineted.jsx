@@ -38,7 +38,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
                             >
                                 {item.title}
                             </h2>
-                            <img src={phone} alt="product" className="product-image" />
+                            <img src={phone} alt="product" className="product-image" loading="lazy"/>
                         </NavLink>
                         <div className="product-footer">
                             <button

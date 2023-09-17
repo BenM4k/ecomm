@@ -40,8 +40,10 @@ const Store = () => {
                 </ul>
             </div>
             <h1 className='title'>Our <span>Top Sales</span></h1>
-            {error ? <h2 className='failed'>{error}</h2>
-                : <Pagineted items={products} itemsPerPage={8} />}
+            <div className="my-store">
+                {error ? <h2 className='failed'>{error}</h2>
+                    : <Pagineted items={products} itemsPerPage={8} />}
+            </div>
         </motion.main>
     )
 }

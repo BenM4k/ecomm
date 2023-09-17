@@ -33,7 +33,7 @@ const Cart = () => {
                             >
                                 <AiFillCloseCircle />
                             </button>
-                            <img src={phone} alt={product.title} />
+                            <img src={phone} alt={product.title} loading='lazy'/>
                             <h3>{product.title}</h3>
                             <p>${product.price}</p>
                             <div className="item-count">
@@ -59,9 +59,9 @@ const Cart = () => {
                     ))}
                 </ul> : <h2>Your cart is empty</h2>}
 
-            <p className='total'>{cart?.length
+            <div className='total'>{cart?.length
                 ? <p>Total : <span>${total.toFixed(2)}</span></p>
-                : <soan />}</p>
+                : <span />}</div>
             <button type="button" className='buy-now'>
                 {cart?.length
                     ? <NavLink to='/shipping'>Buy now</NavLink>

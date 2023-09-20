@@ -92,7 +92,7 @@ const Home = () => {
                                 <NavLink to='store'>Shop with us</NavLink>
                               </button>
                             </div>
-                            <img src={item.img} alt={`banner-${index}`} loading='lazy'/>
+                            <img src={item.img} alt={`banner-${index}`} loading='lazy' />
                           </div>
                         </div>
                       </SplideSlide>
@@ -170,7 +170,7 @@ const Home = () => {
           variants={displayVariant}
           initial='start'
           whileInView="end">
-          <img src={test.img} alt="testimonial" loading='lazy'/>
+          <img src={test.img} alt="testimonial" loading='lazy' />
           <div className="app__testimonial-content">
             <p className="p-text">{test?.feedback}</p>
             <div className="">

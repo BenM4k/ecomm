@@ -23,13 +23,13 @@ const User = () => {
   const { username } = useParams();
   const { auth } = useAuth();
   const orders = useSelector((store) => store.order);
-  const {products} = useSelector((store) => store.product);
+  const { products } = useSelector((store) => store.product);
   const newProds = [...products];
-  
+
   const handleDisplay = (tab) => {
     setActiveTab(tab)
   }
-  
+
   const shuffleprods = (products) => {
     for (let i = products.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -42,14 +42,14 @@ const User = () => {
 
   return (
     <div className='user-profile'>
-      <h1>hello {username}</h1>
+      <h1>Hi, {username}</h1>
       <div className="profile-container">
         <div className="left-profile">
           <div className="identity common-bg">
             <img src="" alt="" />
             <div className="names">
-              <h3>{auth.userInfo ? auth?.userInfo?.firstname : "Benedict"}</h3>
-              <h3>{auth.userInfo ? auth?.userInfo?.lastname : "Makomo"}</h3>
+              <h3>{auth.userInfo ? auth?.userInfo?.firstname : "Default"}</h3>
+              <h3>{auth.userInfo ? auth?.userInfo?.lastname : "User"}</h3>
             </div>
             <div className="id-btn">
               <button>Edit</button>
@@ -59,7 +59,7 @@ const User = () => {
             {myTasks.map((task, index) => (
               <button
                 key={index}
-                onClick={()=> handleDisplay(task?.name.toLowerCase())}
+                onClick={() => handleDisplay(task?.name.toLowerCase())}
               >
                 {task?.name}
               </button>
@@ -104,14 +104,14 @@ const User = () => {
             <ul className="">
               {suggestedProds.map((product) => (
                 <li key={product._id} >
-                <NavLink to={`/product/${product._id}`} className='flex-center'>
-                  <img src={phone} alt={product.title} loading='lazy'/>
-                  <div className="suggested-details">
-                    <h4>{product.title}</h4>
-                    <p>${product.price}</p>
-                  </div>
-                </NavLink>
-              </li>
+                  <NavLink to={`/product/${product._id}`} className='flex-center'>
+                    <img src={phone} alt={product.title} loading='lazy' />
+                    <div className="suggested-details">
+                      <h4>{product.title}</h4>
+                      <p>${product.price}</p>
+                    </div>
+                  </NavLink>
+                </li>
               ))}
             </ul>
           </div>

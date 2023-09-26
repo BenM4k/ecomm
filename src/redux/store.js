@@ -8,7 +8,6 @@ import bannerSlice from './slices/banners/banners';
 import categorySlice from './slices/category/category';
 import wishListSlice from './slices/wishList/wishList';
 import testimonialSlice from './slices/testimonials/testimonials';
-import modalSlice from './slices/modals/modals';
 import searchSlice from './slices/search/searchSlice';
 
 const store = configureStore({
@@ -21,7 +20,6 @@ const store = configureStore({
         category: categorySlice,
         wishList: wishListSlice,
         testimonial: testimonialSlice,
-        modal: modalSlice,
         search: searchSlice,
     }
 })

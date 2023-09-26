@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleEditBanner, toggleEditCategory } from '../../redux/slices/modals/modals';
 import { editBanner, deleteBanner } from '../../redux/slices/banners/banners';
 import UploadProduct from '../../components/Add/UploadProduct';
 import AddCategory from '../../components/Add/addCategory';
 import AddBanner from '../../components/Add/AddBanner';
-import EditBanner from '../../components/Modals/EditBanner';
 import { editCategory, deleteCategory } from '../../redux/slices/category/category';
-import EditCategory from '../../components/Modals/EditCategory';
 import { deleteUser } from '../../redux/slices/users/userSlice';
 import './Admin.scss';
 import {BsFillBagCheckFill} from 'react-icons/bs';
@@ -54,7 +51,6 @@ const Admin = () => {
     }
 
     const handleEditCategory = (id) => {
-        dispatch(toggleEditCategory());
         dispatch(editCategory(id));
     }
 
@@ -155,9 +151,6 @@ const Admin = () => {
                                         }}><FiDelete /></button>
                                         <button onClick={() => handleEditCategory(category._id)}><FaEdit /></button>
                                     </div>
-                                    <div className="">
-                                        <EditCategory category={category} />
-                                    </div>
                                 </li>
                             ))}
                         </ul>
@@ -187,11 +180,7 @@ const Admin = () => {
                                         }}><FiDelete /></button>
                                         <button onClick={() => {
                                             dispatch(editBanner(banner.id));
-                                            dispatch(toggleEditBanner());
                                         }}><FaEdit /></button>
-                                    </div>
-                                    <div className="">
-                                        <EditBanner />
                                     </div>
                                 </li>
                             ))}

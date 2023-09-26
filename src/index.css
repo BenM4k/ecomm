@@ -47,6 +47,11 @@ textarea {
   margin-top: 1rem;
 }
 
+.create-product img {
+  width: 650px;
+  height: 320px;
+}
+
 button:hover {
   scale: 1.05;
 }

@@ -5,7 +5,7 @@
     flex-direction: column;
     max-width: 1080px;
     margin: 0 auto 3rem;
-    min-height: 650px;
+    min-height: 88vh;
 
     h1 {
         font-size: 3em;
@@ -94,6 +94,7 @@
                     border-radius: 16px;
                     cursor: pointer;
                     box-shadow: 3px 2px 5px 0 rgba(0, 0, 0, 0.3);
+
                 }
             }
         }
@@ -105,7 +106,7 @@
         margin-top: auto;
 
         button {
-            background-color: #313bac;
+            background-color: #6b7688;
             color: #fff;
             padding: .3rem .5rem;
             border: none;
@@ -113,8 +114,7 @@
             cursor: pointer;
 
             &.active {
-                background-color: antiquewhite;
-                color: #313bac;
+                background-color: #313bac;
             }
         }
     }

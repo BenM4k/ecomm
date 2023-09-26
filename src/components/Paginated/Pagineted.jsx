@@ -38,7 +38,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
                             >
                                 {item.title}
                             </h2>
-                            <img src={phone} alt="product" className="product-image" />
+                            <img src={phone} alt="product" className="product-image" loading="lazy" />
                         </NavLink>
                         <div className="product-footer">
                             <button
@@ -60,9 +60,13 @@ const Pagineted = ({ items, itemsPerPage }) => {
 
             <div className="page-numbers">
                 {Array.from({ length: totalPages }).map((_, index) => (
-                    <button key={index} onClick={(e) => {
-                        goToPage(index + 1)
-                    }}>{index + 1}</button>
+                    <button
+                        key={index}
+                        onClick={(e) => {
+                            goToPage(index + 1)
+                        }}
+                        className={index + 1 === currentPage ? 'active' : ''}
+                    >{index + 1}</button>
                 ))}
             </div>
         </div>

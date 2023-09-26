@@ -23,7 +23,7 @@ const ProductDetails = () => {
         <div className='partOne'>
           <div className="main-img">
             {/* <img src={urlFor(product.imageurl).url()} alt="" /> */}
-            <img src={phone} alt="phone" />
+            <img src={phone} alt="phone" loading='lazy'/>
           </div>
         </div>
         <div className='partTwo'>

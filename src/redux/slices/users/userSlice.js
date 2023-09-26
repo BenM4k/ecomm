@@ -20,6 +20,14 @@ const initialState = {
             id: uuid(),
             firstname: "Mane",
         },
+        {
+            id: uuid(),
+            firstname: "Tjay",
+        },
+        {
+            id: uuid(),
+            firstname: "Dom",
+        },
     ],
     isLoggedIn: false,
     isLoggedOut: true,

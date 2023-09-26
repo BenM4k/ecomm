@@ -20,7 +20,8 @@ nav {
 
     div {
         a {
-            color: #6b7688;
+            // color: #6b7688;
+            color: #030303;
 
             &:hover {
                 color: #313bac;
@@ -28,13 +29,12 @@ nav {
         }
     }
 
+    .landing-store {
+        margin-left: auto;
+    }
+
     .navbar-cart {
         margin-left: auto;
-        display: flex;
-        align-items: center;
-        border-radius: 50%;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2),
-            -2px -2px 2px rgba(255, 255, 255, 0.7);
 
         a {
             padding: .3rem .5rem;
@@ -54,6 +54,18 @@ nav {
         }
     }
 
+    .navbar-btn {
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2),
+            -2px -2px 2px rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-user {
+        padding: .4rem .4rem;
+    }
+
     ul {
         margin-left: 50px;
         display: flex;
@@ -64,7 +76,8 @@ nav {
         flex: 1;
 
         a {
-            color: #6b7688;
+            // color: #6b7688;
+            color: #030303;
 
             &:hover {
                 color: #313bac;

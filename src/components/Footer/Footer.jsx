@@ -1,6 +1,8 @@
 import React from 'react';
 import './Footer.scss';
 import { NavLink } from 'react-router-dom';
+import { AiOutlineGithub, AiOutlineTwitter, AiFillPhone } from 'react-icons/ai';
+import { BsInstagram, BsLinkedin } from 'react-icons/bs';
 
 const Footer = () => {
     return (
@@ -28,14 +30,18 @@ const Footer = () => {
                     <li><NavLink to="">FAQs</NavLink></li>
                 </ul>
             </div>
-            <div className="contact">
+
+            <div className="socials">
                 <h3>Socials</h3>
-                <ul className='socials'>
-                    <li>Github</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>Phone</li>
+                <ul className=''>
+                    <li><NavLink to='https://www.github.com/BenM4k'><AiOutlineGithub /></NavLink></li>
+                    <li><NavLink to='https://www.twitter.com/_____anomaly'><AiOutlineTwitter /></NavLink></li>
+                    <li><NavLink to='https://www.instagram.com/_b_mak_'><BsInstagram /></NavLink></li>
+                    <li><NavLink to='https://www.linkedin.com/in/benedict-makomo'><BsLinkedin /></NavLink></li>
+                    <li><NavLink to='tel:+250784702911'><AiFillPhone /></NavLink></li>
                 </ul>
+            </div>
+            <div className="contact">
                 <form action="">
                     <h3>Contact us</h3>
                     <label htmlFor="">Email</label>

@@ -10,10 +10,16 @@ const AddBanner = () => {
     const [bannerTitle, setBannerTitle] = useState("");
     const [bannerDesc, setBannerDesc] = useState("");
     const [bannerError, setBannerError] = useState("");
+    const [file, setFile] = useState(null);
+    const handleFileChange = (e) => {
+        const localFile = e.target.files[0];
+        setFile(localFile);
+    }
 
     const handleAddBanner = () => {
         const newBanner = new Banner(bannerTitle, bannerDesc, photo);
         const validateBanner = newBanner.validate();
+
 
         if (validateBanner.length > 0) {
             validateBanner.forEach((error) => {
@@ -36,6 +42,17 @@ const AddBanner = () => {
             <label>Banner description</label>
             <input type='text' value={bannerDesc} onChange={(e) => setBannerDesc(e.target.value)} />
             <button type="button" onClick={handleAddBanner}>Add a banner</button>
+            <div>
+                <input type="file" onChange={handleFileChange} />
+                {
+                    file && (
+                        <div>
+                            <p>Selected file: {file.name}</p>
+                            <img src={URL.createObjectURL(file)} alt="Preview" />
+                        </div>
+                    )
+                }
+            </div>
             <span style={{ color: 'red' }}>{bannerError}</span>
         </>
     )

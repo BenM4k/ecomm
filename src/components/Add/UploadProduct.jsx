@@ -7,14 +7,14 @@ const UploadProduct = () => {
     const categories = useSelector((store) => store.category);
     const { auth } = useAuth();
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
+    const [title, setTitle] = useState(() => "");
+    const [description, setDescription] = useState(() => "");
+    const [price, setPrice] = useState(() => 0);
     const realPrice = parseFloat(price);
-    const [cat, setCat] = useState("");
-    const [err, setErr] = useState("");
+    const [cat, setCat] = useState(() => "");
+    const [err, setErr] = useState(() => "");
 
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState(() => null);
     const handleFileChange = (e) => {
         const localFile = e.target.files[0];
         setFile(localFile);

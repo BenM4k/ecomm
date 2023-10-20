@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
 import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/slices/users/userSlice';
-import useAuth from '../../hooks/useAuth';
-import axios from '../../api/axios';
+import { setCredentials } from '../../redux/slices/authSlice/authSlice';
+import { useLoginMutation } from '../../redux/slices/authSlice/authApiSlice';
 
 const LogIn = () => {
-    const { setAuth } = useAuth();
+    const [
+        login,
+        { isLoading}
+    ] = useLoginMutation();
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -16,9 +19,9 @@ const LogIn = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [pwd, setPwd] = useState("");
-    const [email, setEmail] = useState("");
-    const [error, setError] = useState("");
+    const [pwd, setPwd] = useState(() => "");
+    const [email, setEmail] = useState(() => "");
+    const [error, setError] = useState(() => "");
 
     // useEffect(() => {
     //     userRef.current.focus();
@@ -30,42 +33,33 @@ const LogIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = "/auth";
         const user = {
             email,
             pwd,
         }
 
-        if (user) {
-            try {
-                const response = await axios.post(url, JSON.stringify(user), {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                });
-
-                const accessToken = response?.data.accessToken;
-                const roles = response?.data.roles;
-                const userInfo = response?.data.userInfo;
-                setAuth({ user, userInfo, roles, accessToken });
-                setEmail("");
-                setPwd("");
-                navigate(from, { replace: true });
-                dispatch(loginUser());
-            } catch (err) {
-                if (!err.response) {
-                    setError("No server response")
-                } else if (err.response?.status === 400) {
-                    setError("All fields are required")
-                } else if (err.response?.status === 401) {
-                    setError("Unauthorized")
-                } else {
-                    setError("Login failed")
-                }
+        try {
+            const userData = await login(user).unwrap();
+            dispatch(setCredentials({ ...userData, user }));
+            setEmail("");
+            setPwd("");
+            navigate(from, { replace: true });
+        }catch(err){
+            if (!err.response) {
+                setError("No server response")
+            } else if (err.response?.status === 400) {
+                setError("All fields are required")
+            } else if (err.response?.status === 401) {
+                setError("Unauthorized")
+            } else {
+                setError("Login failed")
             }
         }
     }
 
-    return (
+    const content =  isLoading ?
+        <h1>Loading...</h1> :
+        (
         <div className='register-container'>
             <div className="register-img-placeholder flex-center">
                 <h1>Image placeholder</h1>
@@ -111,8 +105,9 @@ const LogIn = () => {
                     </p>
                 </form>
             </div>
-        </div>
-    )
+            </div>
+        );
+    return content;
 }
 
 export default LogIn

@@ -9,7 +9,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
     const dispatch = useDispatch();
     const { query } = useSelector((store) => store.search);
     const totalPages = Math.ceil(items.length / itemsPerPage);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(() => 1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const searchedItems = query ? items.filter((item) => item.title.toLowerCase().includes(query)) : items;

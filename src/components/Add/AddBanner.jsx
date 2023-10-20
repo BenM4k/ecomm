@@ -7,10 +7,10 @@ import photo from '../../assets/pexels-nappy-935985.jpg';
 const AddBanner = () => {
     const dispatch = useDispatch();
 
-    const [bannerTitle, setBannerTitle] = useState("");
-    const [bannerDesc, setBannerDesc] = useState("");
-    const [bannerError, setBannerError] = useState("");
-    const [file, setFile] = useState(null);
+    const [bannerTitle, setBannerTitle] = useState(() => "");
+    const [bannerDesc, setBannerDesc] = useState(() => "");
+    const [bannerError, setBannerError] = useState(() => "");
+    const [file, setFile] = useState(() => null);
     const handleFileChange = (e) => {
         const localFile = e.target.files[0];
         setFile(localFile);

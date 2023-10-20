@@ -5,7 +5,7 @@ import './Paginated.scss';
 
 const PaginetedHome = ({ items, itemsPerPage }) => {
     const totalPages = Math.ceil(items.length / itemsPerPage);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(() => 1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentItems = items.slice(startIndex, endIndex);

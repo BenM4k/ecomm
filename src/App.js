@@ -42,7 +42,6 @@ const App = () => {
               <Route path='/product/:id' element={<ProductDetails />} />
               <Route path='/category/:category/' element={<Category />} />
               <Route path='/category' element={<AllCat />} />
-              <Route path='/order/:id/' element={<Order />} />
               <Route path='/sign-in' element={<Login />} />
               <Route path='/sign-up' element={<Register />} />
               <Route path='/unauthorized' element={<Unauthorized />} />
@@ -50,6 +49,7 @@ const App = () => {
 
               {/* user routes */}
               <Route element={<RequireAuth allowedRoles={[ROLES.user]} />} >
+                <Route path='/order/:id/' element={<Order />} />
                 <Route path='/profile/:username' element={<User />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/shipping' element={<Shipping />} />

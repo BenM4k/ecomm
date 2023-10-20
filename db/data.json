@@ -1,0 +1,220 @@
+{
+    "banners": [
+        {
+            "title": "Welcome to our Store",
+            "desc": "Dictumst animi occaecati exercitationem pharetra ac aut sagittis vero aliquet, tellus nisi, curae luctus, ipsa, veniam, aliquip ad, soluta! Harum pellentesque earum scelerisque soluta totam aperiam optio",
+            "editing": false
+        },
+        {
+            "title": "The best Online Store",
+            "desc": "Cum provident imperdiet mi eius alias dolor imperdiet similique! Dolorem elit risus pretium omnis, hendrerit, repellat harum doloribus?",
+            "editing": false
+        }
+    ],
+    "categories": [
+        {
+            "title": "headphones",
+            "desc": "Ullam quidem ex possimus sociosqu? Iste sint cras. Facilisis. Potenti, nunc assumenda nostrud aliqua illo. Ante cras tellus",
+            "editing": false
+        },
+        {
+            "title": "phones",
+            "desc": "Ornare tempor voluptatum praesentium! Adipisicing sapien, odio per natoque neque perspiciatis praesentium, hendrerit optio ",
+            "editing": false
+        },
+        {
+            "title": "watches",
+            "desc": "Totam nihil non nulla scelerisque autem cubilia ullamcorper! Officia ullam fugit turpis felis platea sapiente mollis, wisi. Quisquam?",
+            "editing": false
+        },
+        {
+            "title": "earphones",
+            "desc": "Ipsam est tempor duis perferendis eius ante pulvinar maecenas minus quas commodo conubia tempus delectus vulputate ipsa",
+            "editing": false
+        },
+        {
+            "title": "speakers",
+            "desc": "Rerum eiusmod incididunt molestias do elit assumenda do qui dicta, inceptos blanditiis mauris diam. Cras ullamco! Hendrerit non",
+            "editing": false
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "title": "iPhone 14",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas doloribus aptent? Cupidatat",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 499.99,
+            "itemCount": 1,
+            "category": "phones"
+        },
+        {
+            "title": "Samsung s9",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas ",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 599.99,
+            "itemCount": 1,
+            "category": "phones"
+        },
+        {
+            "title": "Iphone 14",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas doloribus aptent",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 699.99,
+            "itemCount": 1,
+            "category": "phones"
+        },
+        {
+            "title": "Bluetooth speaker",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 30,
+            "itemCount": 1,
+            "category": "speakers"
+        },
+        {
+            "title": "Samsung Note 10",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas doloribus aptent? Cupidatat",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 799.99,
+            "itemCount": 1,
+            "category": "phones"
+        },
+        {
+            "title": "Earbuds",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 90,
+            "itemCount": 1,
+            "category": "earphones"
+        },
+        {
+            "title": "Speaker",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 50,
+            "itemCount": 1,
+            "category": "speakers"
+        },
+        {
+            "title": "Samsung Speaker",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 80,
+            "itemCount": 1,
+            "category": "speakers"
+        },
+        {
+            "title": "AirPods",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris,",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 49.99,
+            "itemCount": 1,
+            "category": "earphones"
+        },
+        {
+            "title": "Apple watch",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 199.99,
+            "itemCount": 1,
+            "category": "watches"
+        },
+        {
+            "title": "Google watch",
+            "description": "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor teneturt",
+            "rating": "",
+            "comments": [],
+            "imageurl": "",
+            "price": 200,
+            "itemCount": 1,
+            "category": "watches"
+        }
+    ],
+    "discount": [],
+    "reviews": [
+        {
+            "rating": 4,
+            "comment": "Some comments on this product",
+            "productId": 1
+        },
+        {
+            "rating": 4,
+            "comment": "Some comments 2 on this product",
+            "productId": 1
+        },
+        {
+            "rating": 4,
+            "comment": "Some comments 3 on this product",
+            "productId": 1
+        },
+        {
+            "rating": 4,
+            "comment": "Some comments 4 on this product",
+            "productId": 1
+        },
+        {
+            "rating": 4,
+            "comment": "Some comments 5 on this product",
+            "productId": 1
+        }
+    ],
+    "testimonials": [
+        {
+            "feedback": "Veniam nonummy libero voluptas, urna! Non soluta, illo nostrum! Laudantium, ad quod lobortis eaque placeat, minus, nascetur fames nunc quo,",
+            "name": "Bee Mak",
+            "company": "Lavish Store"
+        },
+        {
+            "feedback": "Ad leo euismod nonummy placerat elementum sunt congue totam odio risus porro vehicula magnam nec elit mollit sapiente semper",
+            "name": "Howard Mak",
+            "company": "Lavish Store"
+        }
+    ],
+    "users":[
+        {
+            "firstname": "Ben",
+            "Lastname": "Mak"
+        },
+        {
+            "firstname": "Jane",
+            "Lastname": "Doe"
+        },
+        {
+            "firstname": "Glenn",
+            "Lastname": "Smith"
+        },
+        {
+            "firstname": "Mane",
+            "Lastname": "Paul"
+        },
+        {
+            "firstname": "Tjay",
+            "Lastname": "John"
+        },
+        {
+            "firstname": "Dom",
+            "Lastname": "Purcel"
+        }
+    ]
+}

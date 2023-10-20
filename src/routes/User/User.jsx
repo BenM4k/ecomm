@@ -19,7 +19,7 @@ const User = () => {
       name: 'Wish list'
     },
   ]
-  const [activeTab, setActiveTab] = useState('orders');
+  const [activeTab, setActiveTab] = useState(() => 'orders');
   const { username } = useParams();
   const { auth } = useAuth();
   const orders = useSelector((store) => store.order);

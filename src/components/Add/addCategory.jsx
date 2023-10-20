@@ -6,9 +6,9 @@ import Category from "../../models/categoryModel";
 const AddCategory = () => {
   const dispatch = useDispatch();
 
-  const [cat, setCat] = useState("");
-  const [catDesc, setCatDesc] = useState("");
-  const [categoryError, setCategoryError] = useState("");
+  const [cat, setCat] = useState(() => "");
+  const [catDesc, setCatDesc] = useState(() => "");
+  const [categoryError, setCategoryError] = useState(() => "");
 
   const handleAddCategory = () => {
     const newCategory = new Category(cat, catDesc);

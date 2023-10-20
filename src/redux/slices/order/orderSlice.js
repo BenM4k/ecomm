@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 
 const OrderSlice = createSlice({
     name: 'order',
     initialState: [],
     reducers: {
         addOrder: (state, action) => {
-            state.push(action.payload);
+            const order = action.payload;
+            order.id = uuid();
+            state.push(order);
         }
     },
 });

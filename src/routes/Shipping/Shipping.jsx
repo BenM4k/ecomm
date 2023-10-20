@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
 import { addOrder } from '../../redux/slices/order/orderSlice'
 import { clearCart } from '../../redux/slices/cart/cartSlice'
 import Order from '../../models/orderModel';
 // import useAuth from '../../hooks/useAuth';
 import './Shipping.scss';
+import Address from './Address';
+import Card from './Card';
 
 const Shipping = () => {
     const dispatch = useDispatch();
@@ -24,21 +25,24 @@ const Shipping = () => {
     const time = `${year}-${month}-${day} at ${hour}h-${minutes}m-${seconds}s`;
 
     //shipping address
-    const [country, setCountry] = useState("");
-    const [street, setStreet] = useState("");
-    const [streetAddress, setStreetAddress] = useState("");
-    const [road, setRoad] = useState("");
-    const [postCode, setPostCode] = useState("");
-    const shippingDetails = [country, streetAddress, street, road, postCode]
-
+    const [address, setAddress] = useState({
+        country: "",
+        street: "",
+        strAddr: "",
+        road: "",
+        postcode: "",
+    });
+    // 
     //cart Details 
-    const [card, setCard] = useState("");
-    const [cardName, setCardName] = useState("");
-    const [cardNumber, setCardNumber] = useState("");
-    const [cardSecurity, setCardSecurity] = useState("");
-    const [cardDate, setCardDate] = useState("");
-    const paymentMethod = [card, cardName, cardNumber, cardSecurity, cardDate];
+    const [card, setCard] = useState({
+        card: "",
+        name: "",
+        number: "",
+        security: "",
+        date: "",
+    });
 
+    console.log(card)
     //get total amount
     let total = 10;
 
@@ -50,7 +54,7 @@ const Shipping = () => {
 
     //set new Order
     const newOrder = new Order(
-        uuid(), 'ben', cart, total, 'pending', time, shippingDetails, paymentMethod
+       'ben', cart, total, 'pending', time, address, card
     );
 
     const validateOrder = newOrder.validate();
@@ -59,54 +63,11 @@ const Shipping = () => {
         <div className='ship-container'>
 
             <div className="ship-body">
-                <div className={"ship-address"} id='residence'>
-                    <h2>Enter your shipping address</h2>
-                    <select name="country" id="country" value={country} onChange={(e) => setCountry(e.target.value)}>
-                        <option value="" selected>Choose a country</option>
-                        <option value="USA">USA</option>
-                        <option value="CANADA">CANADA</option>
-                        <option value="MEXICO">MEXICO</option>
-                        <option value="BRAZIL">BRAZIL</option>
-                        <option value="RU">RU</option>
-                    </select>
-                    <label>Street name</label>
-                    <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
-                    <label>Street address</label>
-                    <input type="text" value={streetAddress} onChange={(e) => setStreetAddress(e.target.value)} />
-                    <label>Road</label>
-                    <input type="text" value={road} onChange={(e) => setRoad(e.target.value)} />
-                    <label htmlFor="">Post code</label>
-                    <input type="text" value={postCode} onChange={(e) => setPostCode(e.target.value)} />
-
-                    <div className="ship-btns">
-                        <button
-                            type="button"
-                            className='back'
-                        >
-                            <NavLink to='/cart'>Back</NavLink>
-                        </button>
-                    </div>
-                </div>
+                <Address setAddress={setAddress}/>
 
                 <div className="pay-method" id='payment'>
                     <h2>Select your payment method</h2>
-                    <div className="card">
-                        <label htmlFor="visa">Visa</label>
-                        <input type="checkbox" name="visa" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
-                        <label htmlFor="mastercard">Mastercard</label>
-                        <input type="checkbox" name="mastercard" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
-                        <label htmlFor="paypal">Paypal</label>
-                        <input type="checkbox" name="paypal" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
-                        <label htmlFor="stripe">Stripe</label>
-                        <input type="checkbox" name="stripe" id="" placeholder='visa' value={card} onChange={(e) => setCard(e.target.value)} />
-
-                    </div>
-                    <div className="bic-card">
-                        <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
-                        <input type="text" value={cardSecurity} onChange={(e) => setCardSecurity(e.target.value)} />
-                        <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} />
-                        <input type="text" value={cardDate} onChange={(e) => setCardDate(e.target.value)} />
-                    </div>
+                    <Card setCard={setCard}/>
                     <button
                         type="button"
                         onClick={() => {

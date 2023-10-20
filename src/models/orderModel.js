@@ -1,6 +1,5 @@
 class Order {
-    constructor(id, customerName, items, total, status, createdAt, shippingDetails, paymentMethod,) {
-        this.id = id;
+    constructor(customerName, items, total, status, createdAt, shippingDetails, paymentMethod,) {
         this.customerName = customerName;
         this.items = items;
         this.total = total;
@@ -13,9 +12,7 @@ class Order {
     validate() {
         const errors = [];
 
-        if (!this.id || typeof this.id !== 'string') {
-            errors.push('Order id is required and must be a string');
-        } else if (!this.customerName || typeof this.customerName !== 'string') {
+        if (!this.customerName || typeof this.customerName !== 'string') {
             errors.push('Customer id is required and must be a string');
         } else if (!this.items.length === 0 || typeof this.items !== 'object') {
             errors.push('Please provide valid items for the order');

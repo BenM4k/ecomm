@@ -4,11 +4,11 @@ import phone from '../../assets/pngimg.com - iphone_14_PNG24.png';
 import './Paginated.scss';
 
 const PaginetedHome = ({ items, itemsPerPage }) => {
-    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const totalPages = Math.ceil(items?.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(() => 1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentItems = items.slice(startIndex, endIndex);
+    const currentItems = items?.slice(startIndex, endIndex);
 
     const goToPage = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -17,13 +17,13 @@ const PaginetedHome = ({ items, itemsPerPage }) => {
     return (
         <div className="main-home-container">
             <ul className="product-list">
-                {currentItems.map((item) => (
+                {currentItems?.map((item) => (
                     <li
-                        key={item._id}
+                        key={item?.id}
                         className='product-home'
                     >
                         <NavLink
-                            to={`/product/${item._id}`}
+                            to={`/product/${item?.id}`}
                             className="product-link"
                             initial="start"
                             hover="hover"
@@ -31,13 +31,13 @@ const PaginetedHome = ({ items, itemsPerPage }) => {
                             <h2
                                 className='product-name'
                             >
-                                {item.title}
+                                {item?.title}
                             </h2>
                             <img src={phone} alt="product" className="product-image" loading="lazy"/>
                             <span
                                 className='product-price'
                             >
-                                ${item.price}
+                                ${item?.price}
                             </span>
                         </NavLink>
                     </li>

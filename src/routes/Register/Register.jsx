@@ -2,14 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import axios from '../../api/axios';
 import User from '../../models/userModel';
 import image from '../../assets/106-1065068_samsung-note-10-plus-png-transparent-png-removebg-preview.png';
 import './Register.scss';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-@.]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
+// const REGISTER_URL = '/register';
 
 const Register = () => {
     const userRef = useRef();
@@ -69,12 +68,7 @@ const Register = () => {
                     setErr(`${err}`);
                 })
             }
-            const response = await axios.post(REGISTER_URL, JSON.stringify(newUser), {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            });
-            console.log(response.data);
-            // console.log(response.accessToken); 
+            // console.log(response.accessToken);
             // console.log(JSON.stringify(response));
             setEmail("");
             setPwd("");

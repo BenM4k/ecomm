@@ -1,12 +1,12 @@
-import { editBanner, deleteBanner } from '../../redux/slices/banners/banners';
+import { selectAllBanners } from '../../redux/slices/banners/banners';
 import AddBanner from '../../components/Add/AddBanner';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FiDelete } from 'react-icons/fi';
 import { FaEdit, FaImage } from 'react-icons/fa';
 
 const HandleBanners = () => {
-    const dispatch = useDispatch();
-    const banners = useSelector((store) => store.banner);
+    // const dispatch = useDispatch();
+    const banners = useSelector(selectAllBanners);
 
   return (
     <>
@@ -24,10 +24,12 @@ const HandleBanners = () => {
                     </div>
                     <div className="buttons">
                         <button onClick={() => {
-                            dispatch(deleteBanner(banner.id));
+                            return
+                            // dispatch(deleteBanner(banner.id));
                         }}><FiDelete /></button>
                         <button onClick={() => {
-                            dispatch(editBanner(banner.id));
+                            return
+                            // dispatch(editBanner(banner.id));
                         }}><FaEdit /></button>
                     </div>
                 </li>

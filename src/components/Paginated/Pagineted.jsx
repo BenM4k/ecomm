@@ -8,12 +8,12 @@ import './Paginated.scss';
 const Pagineted = ({ items, itemsPerPage }) => {
     const dispatch = useDispatch();
     const { query } = useSelector((store) => store.search);
-    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const totalPages = Math.ceil(items?.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(() => 1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const searchedItems = query ? items.filter((item) => item.title.toLowerCase().includes(query)) : items;
-    const currentItems = searchedItems.slice(startIndex, endIndex);
+    const searchedItems = query ? items?.filter((item) => item.title.toLowerCase().includes(query)) : items;
+    const currentItems = searchedItems?.slice(startIndex, endIndex);
 
     const goToPage = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -22,13 +22,13 @@ const Pagineted = ({ items, itemsPerPage }) => {
     return (
         <div className="main-container">
             <ul className="product-list">
-                {currentItems.length ? currentItems.map((item) => (
+                {currentItems?.length ? currentItems?.map((item) => (
                     <li
-                        key={item._id}
+                        key={item.id}
                         className='product'
                     >
                         <NavLink
-                            to={`/product/${item._id}`}
+                            to={`/product/${item.id}`}
                             className="product-link"
                             initial="start"
                             hover="hover"

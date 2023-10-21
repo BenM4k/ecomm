@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectAllProducts } from '../../redux/slices/products/productSlice';
 import { useParams, NavLink } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
 import { AiOutlineStar, AiFillStar, AiOutlineShoppingCart } from 'react-icons/ai';
@@ -12,18 +13,18 @@ import './ProductDetails.scss';
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const products = useSelector((store) => store.product.products);
-  const product = products.find(product => product._id === id);
+  const products = useSelector(selectAllProducts);
+  const product = products.find((product) => product.id === id );
   const cat = product?.category;
   const SuggestedProducts = products?.filter((product) => product.category === cat);
 
   return (
     <div className='product-detail-container'>
-      <div className="container" key={product._id}>
+      <div className="container" key={product.id}>
         <div className='partOne'>
           <div className="main-img">
             {/* <img src={urlFor(product.imageurl).url()} alt="" /> */}
-            <img src={phone} alt="phone" loading='lazy'/>
+            <img src={product?.img} alt="phone" loading='lazy'/>
           </div>
         </div>
         <div className='partTwo'>
@@ -33,8 +34,8 @@ const ProductDetails = () => {
           </NavLink>
           <div className="product-details">
             <div className="details-head">
-              <h2>{product.title}</h2>
-              <p className='product-details-price'>${product.price}</p>
+              <h2>{product?.title}</h2>
+              <p className='product-details-price'>${product?.price}</p>
             </div>
             <div className="stars">
               <AiFillStar />
@@ -43,7 +44,7 @@ const ProductDetails = () => {
               <AiFillStar />
               <AiOutlineStar />
             </div>
-            <p className='product-details-desc'>{product.description}</p>
+            <p className='product-details-desc'>{product?.description}</p>
           </div>
           <div className="btn-container">
             <button
@@ -61,9 +62,9 @@ const ProductDetails = () => {
       <div className="suggested-products flex-center">
         <h2>In the same category</h2>
         <ul>
-          {SuggestedProducts.filter((prod) => prod._id !== product._id).map((product) => (
-            <li key={product._id} >
-              <NavLink to={`/product/${product._id}`} className='flex-center'>
+          {SuggestedProducts?.filter((prod) => prod.id !== product.id).map((product) => (
+            <li key={product.id} >
+              <NavLink to={`/product/${product.id}`} className='flex-center'>
                 <img src={phone} alt={product.title} />
                 <div className="suggested-details">
                   <h4>{product.title}</h4>

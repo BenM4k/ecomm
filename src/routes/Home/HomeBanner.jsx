@@ -1,10 +1,11 @@
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import { useSelector } from 'react-redux';
+import { selectAllBanners } from '../../redux/slices/banners/banners';
 import { NavLink } from 'react-router-dom';
 import '@splidejs/react-splide/css';
 
 const HomeBanner = () => {
-    const banner = useSelector((store) => store.banner);
+    const banner = useSelector(selectAllBanners);
   return (
     <>
         <Splide

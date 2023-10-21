@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
+import { selectAllCategories } from '../../redux/slices/category/category'
 import { NavLink } from 'react-router-dom';
 
 const parentVariant = {
@@ -14,7 +15,7 @@ const parentVariant = {
       }
     }
   }
-  
+
   const childVariant = {
     start: {
       opacity: 0,
@@ -32,8 +33,8 @@ const parentVariant = {
   }
 
 const HomeCategories = () => {
-    const categories = useSelector((store) => store.category);
-    const showCategories = categories.slice(1, 5);
+    const categories = useSelector(selectAllCategories);
+    const showCategories = categories?.slice(1, 5);
   return (
     <motion.ul
         variants={parentVariant}
@@ -41,8 +42,8 @@ const HomeCategories = () => {
         whileInView="end"
         className='flex-center'
     >
-        {showCategories.map((category) => (
-        <motion.li key={category._id} variants={childVariant}>
+        {showCategories?.map((category) => (
+        <motion.li key={category.id} variants={childVariant}>
             <NavLink to={`/category/${category.title}`} className='flex-center'>
             <h2>{category.title}</h2>
             <p>{category.desc}</p>

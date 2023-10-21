@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { selectAllUsers } from '../../redux/slices/users/userSlice';
 import './Admin.scss';
 import {BsFillBagCheckFill} from 'react-icons/bs';
 import {TbCategory} from 'react-icons/tb';
@@ -37,23 +38,23 @@ const Admin = () => {
     ]
     const [activeTab, setActiveTab] = useState(() => 'users');
 
-    const { users } = useSelector((store) => store.user);
+    const users = useSelector(selectAllUsers);
 
     const handleDisplay = (category) => {
         setActiveTab(category)
     }
-    
+
     return (
         <div className='admin-wrapper'>
             <div className="nav-list">
-                {myList.map((list) => (
+                {myList?.map((list) => (
                     <button
-                        key={list.name}
+                        key={list?.name}
                         onClick={() => handleDisplay(list?.name.toLowerCase())}
                         className={activeTab === list?.name.toLowerCase() ? 'active' : ''}
                     >
-                        {list.pic}
-                        <span>{list.name}</span>
+                        {list?.pic}
+                        <span>{list?.name}</span>
                     </button>
                 ))}
             </div>
@@ -68,7 +69,7 @@ const Admin = () => {
                             <h2>Users List</h2>
                         </div>
                         {users?.length
-                            ? <HandleUsers /> 
+                            ? <HandleUsers />
                             : <p>No users to display</p>
                         }
                     </div>
@@ -106,4 +107,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default Admin;

@@ -7,7 +7,6 @@ import CartProduct from './CartProduct';
 
 const Cart = () => {
     const cart = useSelector((store) => store.cart);
-    
     let total = 0;
 
     cart?.forEach((item) => {

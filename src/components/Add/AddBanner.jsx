@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { addBanner } from '../../redux/slices/banners/banners';
+import { useAddBannerMutation } from '../../redux/slices/banners/banners';
 import Banner from '../../models/bannerModel';
 import photo from '../../assets/pexels-nappy-935985.jpg';
 
 const AddBanner = () => {
     const dispatch = useDispatch();
-
+    const [addBanner] = useAddBannerMutation();
     const [bannerTitle, setBannerTitle] = useState(() => "");
     const [bannerDesc, setBannerDesc] = useState(() => "");
     const [bannerError, setBannerError] = useState(() => "");

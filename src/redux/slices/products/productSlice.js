@@ -1,170 +1,68 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { client } from "../../../Client";
-import { v4 as uuid } from 'uuid';
+import { createEntityAdapter, createSelector } from '@reduxjs/toolkit';
+import apiSlice from '../../api/apiSlice';
+import { v4 as uuid } from "uuid";
+import phone from '../../../assets/pngimg.com - iphone_14_PNG24.png';
 
+const productsAdapter = createEntityAdapter();
 
-export const getProducts = createAsyncThunk('products/GetProducts', async (_, thunkAPI) => {
-    const query = `*[_type == 'product']`;
-    try {
-        const response = await client.fetch(query);
-        return response;
-    } catch (err) {
-        return thunkAPI.rejectWithValue("Could not fetch the products.");
-    }
-})
+const initialState = productsAdapter.getInitialState();
 
-const initialState = {
-    products: [
-        {
-            _id: uuid(),
-            title: "iPhone 14",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas doloribus aptent? Cupidatat",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 499.99,
-            itemCount: 1,
-            category: "phones",
-        },
-        {
-            _id: uuid(),
-            title: "Samsung s9",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas ",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 599.99,
-            itemCount: 1,
-            category: "phones",
-        },
-        {
-            _id: uuid(),
-            title: "Iphone 14",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas doloribus aptent",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 699.99,
-            itemCount: 1,
-            category: "phones",
-        },
-        {
-            _id: uuid(),
-            title: "Bluetooth speaker",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 30,
-            itemCount: 1,
-            category: "speakers",
-        },
-        {
-            _id: uuid(),
-            title: "Samsung Note 10",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo quas doloribus aptent? Cupidatat",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 799.99,
-            itemCount: 1,
-            category: "phones",
-        },
-        {
-            _id: uuid(),
-            title: "Earbuds",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 90,
-            itemCount: 1,
-            category: "earphones",
-        },
-        {
-            _id: uuid(),
-            title: "Speaker",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis, autem inceptos semper natoque tincidunt nemo",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 50,
-            itemCount: 1,
-            category: "speakers",
-        },
-        {
-            _id: uuid(),
-            title: "Samsung Speaker",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 80,
-            itemCount: 1,
-            category: "speakers",
-        },
-        {
-            _id: uuid(),
-            title: "AirPods",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris,",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 49.99,
-            itemCount: 1,
-            category: "earphones",
-        },
-        {
-            _id: uuid(),
-            title: "Apple watch",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor tenetur quo iaculis",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 199.99,
-            itemCount: 1,
-            category: "watches",
-        },
-        {
-            _id: uuid(),
-            title: "Google watch",
-            description: "Consequatur fames per officiis, pulvinar, ac anim ultrices voluptates! Deserunt velit quo! Imperdiet cubilia. Vero quia expedita, dictum pellentesque laboris, dolorem ultricies, curabitur rhoncus ad do? Porttitor teneturt",
-            rating: "",
-            comments: [],
-            imageurl: "",
-            price: 200,
-            itemCount: 1,
-            category: "watches",
-        },
-    ],
-    error: '',
-    productLoading: false,
-};
-
-const ProductSlice = createSlice({
-    name: 'product',
-    initialState,
-    reducers: {
-        updateProductCategory: (state, action) => {
-            const newList = state.products.filter(p => p.category === action.payload.prev);
-            newList.forEach(p => {
-                p.category = action.payload.new;
-            })
-        }
-    },
-    extraReducers: {
-        // [getProducts.pending]: (state) => {
-        //     state.productLoading = true;
-        // },
-        [getProducts.fulfilled]: (state, action) => {
-            state.products = action.payload;
-        },
-        // [getProducts.rejected]: (state, action) => {
-        //     state.error = action.payload;
-        // }
-    }
+export const productApiSlice = apiSlice.injectEndpoints({
+    endpoints: (builder) => ({
+        getProducts: builder.query({
+            query: () => '/products',
+            transformResponse: (res) => {
+                const products = res?.map((product) => {
+                    if (!product.id) product.id = uuid();
+                    if (!product.img) product.img = phone;
+                    return product;
+                });
+                return productsAdapter.setAll(initialState, products);
+            },
+            providesTags: (result) => [
+                { type: 'product', id: 'LIST' },
+                ...result?.ids?.map((id) => ({ type: 'product', id})),
+            ],
+        }),
+        addProduct: builder.mutation({
+            query: (product) => ({
+                url: '/products',
+                method: 'POST',
+                body: {
+                  ...product,
+                  id: uuid(),
+                },
+              }),
+              invalidatesTags: [
+                { type: 'product', id: 'LIST' },
+              ],
+        }),
+        deleteProduct: builder.mutation({
+            query: ({ id }) => ({
+                url: `/products/${id}`,
+                method: 'DELETE',
+                body: { id },
+              }),
+            invalidatesTags: (arg) => [
+            { type: 'product', id: arg.id },
+            ],
+        })
+    }),
 });
 
-export const { updateProductCategory } = ProductSlice.actions;
+export const {
+    useAddProductMutation,
+    useDeleteProductMutation,
+    useGetProductsQuery
+} = productApiSlice;
 
-export default ProductSlice.reducer;
+export const selectProductsResult = productApiSlice.endpoints.getProducts.select();
+
+const selectProductsData = createSelector(
+    selectProductsResult,
+    (productResult) => productResult.data,
+)
+
+export const {
+    selectAll: selectAllProducts,
+} = productsAdapter.getSelectors((store) => selectProductsData(store) ?? initialState )

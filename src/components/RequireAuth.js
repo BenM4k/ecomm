@@ -1,11 +1,11 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "../redux/slices/authSlice/authSlice";
+// import { useSelector } from "react-redux";
+// import { selectCurrentToken } from "../redux/slices/authSlice/authSlice";
 
 import useAuth from "../hooks/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {
-    const token = useSelector(selectCurrentToken);
+    // const token = useSelector(selectCurrentToken);
     const location = useLocation();
 
     const { auth } = useAuth();

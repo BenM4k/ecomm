@@ -1,5 +1,6 @@
 import PaginetedHome from '../../components/PaginatedHome/PaginetedHome';
 import { useSelector } from 'react-redux';
+import { selectAllProducts } from '../../redux/slices/products/productSlice'
 import { motion } from 'framer-motion';
 
 const displayVariant = {
@@ -13,8 +14,8 @@ const displayVariant = {
   }
 
 const HomeLatestsProducts = () => {
-    const { products } = useSelector((store) => store.product);
-    const filteredProds = products.slice(1, 9);
+    const products = useSelector(selectAllProducts);
+    const filteredProds = products?.slice(1, 9);
   return (
     <>
         <h2 className='title latest-title'>Latest <span>products</span></h2>

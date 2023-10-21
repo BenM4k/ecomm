@@ -1,80 +1,66 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { client } from "../../../Client";
-import { v4 as uuid } from 'uuid';
+import { createEntityAdapter, createSelector } from '@reduxjs/toolkit';
+import apiSlice from '../../api/apiSlice';
+import { v4 as uuid } from "uuid";
 
-export const getCategory = createAsyncThunk('category/GetCategory', async (_, thunkAPI) => {
-    const query = `*[_type == 'category']`;
-    try {
-        const response = await client.fetch(query);
-        return response;
-    } catch (err) {
-        return thunkAPI.rejectWithValue('could not fetch the category');
-    }
-})
+const categoriesAdapter = createEntityAdapter();
 
-const categorySlice = createSlice({
-    name: 'category',
-    initialState: [
-        {
-            title: 'headphones',
-            desc: "Ullam quidem ex possimus sociosqu? Iste sint cras. Facilisis. Potenti, nunc assumenda nostrud aliqua illo. Ante cras tellus",
-            _id: uuid(),
-            editing: false,
-        },
-        {
-            title: 'phones',
-            desc: "Ornare tempor voluptatum praesentium! Adipisicing sapien, odio per natoque neque perspiciatis praesentium, hendrerit optio ",
-            _id: uuid(),
-            editing: false,
-        },
-        {
-            title: 'watches',
-            desc: "Totam nihil non nulla scelerisque autem cubilia ullamcorper! Officia ullam fugit turpis felis platea sapiente mollis, wisi. Quisquam?",
-            _id: uuid(),
-            editing: false,
-        },
-        {
-            title: 'earphones',
-            desc: "Ipsam est tempor duis perferendis eius ante pulvinar maecenas minus quas commodo conubia tempus delectus vulputate ipsa",
-            _id: uuid(),
-            editing: false,
-        },
-        {
-            title: 'speakers',
-            desc: "Rerum eiusmod incididunt molestias do elit assumenda do qui dicta, inceptos blanditiis mauris diam. Cras ullamco! Hendrerit non",
-            _id: uuid(),
-            editing: false,
-        },
-    ],
-    reducers: {
-        addCategory: (state, action) => {
-            const newCAt = {
-                _id: uuid(),
-                title: action.payload.title,
-                desc: action.payload.desc,
-                editing: false,
-            }
-            state.push(newCAt);
-        },
-        editCategory: (state, action) => {
-            const category = state.find(c => c._id === action.payload);
-            category.editing = !category.editing;
-        },
-        changeCategory: (state, action) => {
-            const category = state.find(c => c._id === action.payload._id);
-            category.title = action.payload.title;
-            category.desc = action.payload.desc;
-        },
-        deleteCategory: (state, action) => {
-            return state.filter(c => c._id !== action.payload)
-        }
-    },
-    extraReducers: {
-        [getCategory.fulfilled]: (state, action) => {
-            state = action.payload;
-        }
-    }
-})
+const initialState = categoriesAdapter.getInitialState();
 
-export const { addCategory, editCategory, changeCategory, deleteCategory } = categorySlice.actions;
-export default categorySlice.reducer;
+export const categoryApiSlice = apiSlice.injectEndpoints({
+    endpoints: (builder) => ({
+        getCategories: builder.query({
+            query: () => '/categories',
+            transformResponse: (res) => {
+                const categories = res?.map((category) => {
+                    if (!category.id) category.id = uuid();
+                    return category;
+                });
+                return categoriesAdapter.setAll(initialState, categories);
+            },
+            providesTags: (result) => [
+                { type: 'category', id: 'LIST' },
+                ...result?.ids?.map((id) => ({ type: 'category', id})),
+            ],
+        }),
+        addCategory: builder.mutation({
+            query: (category) => ({
+                url: '/categories',
+                method: 'POST',
+                body: {
+                  ...category,
+                  id: uuid(),
+                },
+              }),
+              invalidatesTags: [
+                { type: 'category', id: 'LIST' },
+              ],
+        }),
+        deleteCategory: builder.mutation({
+            query: ({ id }) => ({
+                url: `/categories/${id}`,
+                method: 'DELETE',
+                body: { id },
+              }),
+            invalidatesTags: (arg) => [
+            { type: 'category', id: arg.id },
+            ],
+        })
+    }),
+});
+
+export const {
+    useAddCategoryMutation,
+    useDeleteCategoryMutation,
+    useGetCategoriesQuery
+} = categoryApiSlice;
+
+export const selectCategoriesResult = categoryApiSlice.endpoints.getCategories.select()
+
+const selectCategoriesData = createSelector(
+    selectCategoriesResult,
+    (categoryResult) => categoryResult.data,
+)
+
+export const {
+    selectAll: selectAllCategories,
+} = categoriesAdapter.getSelectors((store) => selectCategoriesData(store) ?? initialState )

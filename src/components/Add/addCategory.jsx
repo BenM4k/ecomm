@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCategory } from "../../redux/slices/category/category";
+import { useAddCategoryMutation } from "../../redux/slices/category/category";
 import Category from "../../models/categoryModel";
 
 const AddCategory = () => {
   const dispatch = useDispatch();
-
+  const [addCategory] = useAddCategoryMutation();
   const [cat, setCat] = useState(() => "");
   const [catDesc, setCatDesc] = useState(() => "");
   const [categoryError, setCategoryError] = useState(() => "");

@@ -1,15 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectAllProducts } from '../../redux/slices/products/productSlice';
 import { useParams } from 'react-router-dom';
 import Pagineted from '../../components/Paginated/Pagineted';
 
 const Category = () => {
-    const { products } = useSelector((store) => store.product);
+    const products = useSelector(selectAllProducts);
     const { category } = useParams();
-    const filteredProducts = products.filter(product => product.category === category);
+    const filteredProducts = products?.filter(product => product.category === category);
     return (
         <>
-            {filteredProducts.length === 0 ? <h2 style={{
+            {filteredProducts?.length === 0 ? <h2 style={{
                 margin: "15rem 3rem",
                 textAlign: "center"
             }}>No products for this category</h2> :

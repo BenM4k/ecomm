@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { selectAllProducts } from '../../redux/slices/products/productSlice';
 import { NavLink, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import UploadProduct from '../../components/Add/UploadProduct';
@@ -23,7 +24,7 @@ const User = () => {
   const { username } = useParams();
   const { auth } = useAuth();
   const orders = useSelector((store) => store.order);
-  const { products } = useSelector((store) => store.product);
+  const products = useSelector(selectAllProducts);
   const newProds = [...products];
 
   const handleDisplay = (tab) => {
@@ -31,7 +32,7 @@ const User = () => {
   }
 
   const shuffleprods = (products) => {
-    for (let i = products.length - 1; i > 0; i--) {
+    for (let i = products?.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [products[i], products[j]] = [products[j], products[i]]
     }
@@ -39,6 +40,7 @@ const User = () => {
   shuffleprods(newProds)
 
   const suggestedProds = newProds.slice(1, 4);
+  console.log(suggestedProds)
 
   return (
     <div className='user-profile'>
@@ -48,8 +50,8 @@ const User = () => {
           <div className="identity common-bg">
             <img src="" alt="" />
             <div className="names">
-              <h3>{auth.userInfo ? auth?.userInfo?.firstname : "Default"}</h3>
-              <h3>{auth.userInfo ? auth?.userInfo?.lastname : "User"}</h3>
+              <h3>{auth?.userInfo ? auth?.userInfo?.firstname : "Default"}</h3>
+              <h3>{auth?.userInfo ? auth?.userInfo?.lastname : "User"}</h3>
             </div>
             <div className="id-btn">
               <button>Edit</button>
@@ -103,8 +105,8 @@ const User = () => {
             <h3>Recommended products</h3>
             <ul className="">
               {suggestedProds.map((product) => (
-                <li key={product._id} >
-                  <NavLink to={`/product/${product._id}`} className='flex-center'>
+                <li key={product?.id} >
+                  <NavLink to={`/product/${product.id}`} className='flex-center'>
                     <img src={phone} alt={product.title} loading='lazy' />
                     <div className="suggested-details">
                       <h4>{product.title}</h4>

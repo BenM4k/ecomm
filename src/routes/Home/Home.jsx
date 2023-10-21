@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 import './Home.scss';
@@ -9,17 +8,10 @@ import HomeTestimonials from './HomeTestimonials';
 import HomeLatestsProducts from './HomeLatestsProducts';
 
 const Home = () => {
-  const { error, loadingProducts } = useSelector((store) => store.product);
-  
   return (
     <>
       <section className='hero-banner section'>
-        {error ? <h2 className='failed'>{error}</h2>
-          : loadingProducts ? <h1 className='load'>Loading...</h1>
-            : <>
-              <HomeBanner />
-            </>
-        }
+        <HomeBanner />
       </section>
 
       <section className="home-categories section">

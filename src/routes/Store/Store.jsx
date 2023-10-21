@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { updateQuery } from '../../redux/slices/search/searchSlice';
+import { selectAllProducts } from '../../redux/slices/products/productSlice';
+import { selectAllCategories } from '../../redux/slices/category/category';
 // import { urlFor } from '../../Client';
 import './Store.scss';
 import Pagineted from '../../components/Paginated/Pagineted';
 
 const Store = () => {
     const dispatch = useDispatch();
-    const { error, products } = useSelector((store) => store.product);
+    const products = useSelector(selectAllProducts);
     const { query } = useSelector((store) => store.search);
-    const categories = useSelector((store) => store.category);
+    const categories = useSelector(selectAllCategories);
     const storeCat = categories.slice(0, 5);
 
     const handleUpdateQuery = (e) => {
@@ -41,8 +43,7 @@ const Store = () => {
             </div>
             <h1 className='title'>Our <span>Top Sales</span></h1>
             <div className="my-store">
-                {error ? <h2 className='failed'>{error}</h2>
-                    : <Pagineted items={products} itemsPerPage={8} />}
+                <Pagineted items={products} itemsPerPage={8} />
             </div>
         </motion.main>
     )

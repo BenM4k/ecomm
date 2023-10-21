@@ -1,16 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
 import AddCategory from '../../components/Add/addCategory';
+import { selectAllCategories, useDeleteCategoryMutation } from '../../redux/slices/category/category';
 import {TbCategory} from 'react-icons/tb';
 import { FiDelete } from 'react-icons/fi';
-import { editCategory, deleteCategory } from '../../redux/slices/category/category';
 import { FaEdit} from 'react-icons/fa';
 
 const HandleCategories = () => {
-    const categories = useSelector((store) => store.category);
+    const categories = useSelector(selectAllCategories);
+    const [deleteCategory] = useDeleteCategoryMutation();
     const dispatch = useDispatch();
-    const handleEditCategory = (id) => {
-        dispatch(editCategory(id));
-    }
+    // const handleEditCategory = (id) => {
+    //     return
+    //     // dispatch(editCategory(id));
+    // }
   return (
     <>
         <div className="dash-head">
@@ -18,15 +20,15 @@ const HandleCategories = () => {
             <h2>Categories List</h2>
         </div>
         <ul className="admin-categories">
-            {categories.map((category) => (
-                <li key={category._id}>
+            {categories?.map((category) => (
+                <li key={category.id}>
                     <h3>{category.title}</h3>
                     <p>{category.desc}</p>
                     <div className="buttons">
                         <button onClick={() => {
                             dispatch(deleteCategory(category._id));
                         }}><FiDelete /></button>
-                        <button onClick={() => handleEditCategory(category._id)}><FaEdit /></button>
+                        <button onClick={() => {}}><FaEdit /></button>
                     </div>
                 </li>
             ))}

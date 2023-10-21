@@ -2,6 +2,7 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { selectAllTestimonials } from '../../redux/slices/testimonials/testimonials';
 
 const displayVariant = {
     start: { opacity: 0 },
@@ -14,9 +15,9 @@ const displayVariant = {
   }
 
 const HomeTestimonials = () => {
-    const testimonials = useSelector((store) => store.testimonial)
+  const testimonials = useSelector(selectAllTestimonials)
   const [currentIndex, setCurrentIndex] = useState( () => 0 );
-    const test = testimonials[currentIndex];
+  const test = testimonials[currentIndex];
   const handleClick = (index) => {
     setCurrentIndex(index);
   }
@@ -25,26 +26,26 @@ const HomeTestimonials = () => {
         <h2 className='title test'>Testimonials</h2>
 
         <motion.div className="app__testimonial-item flex-center"
-        variants={displayVariant}
-        initial='start'
-        whileInView="end">
-        <img src={test.img} alt="testimonial" loading='lazy' />
-        <div className="app__testimonial-content">
-            <p className="p-text">{test?.feedback}</p>
-            <div className="">
-            <h4 className="bold-text">{test?.name}</h4>
-            <h5 className="p-text">{test?.company}</h5>
-            </div>
-        </div>
+          variants={displayVariant}
+          initial='start'
+          whileInView="end">
+          <img src={test?.img} alt="testimonial" loading='lazy' />
+          <div className="app__testimonial-content">
+              <p className="p-text">{test?.feedback}</p>
+              <div className="">
+              <h4 className="bold-text">{test?.name}</h4>
+              <h5 className="p-text">{test?.company}</h5>
+              </div>
+          </div>
         </motion.div>
 
         <div className="app__testimonial-btns flex-center">
-        <div className="flex-center" onClick={() => handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)}>
-            <HiChevronLeft />
-        </div>
-        <div className="flex-center" onClick={() => handleClick(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1)}>
-            <HiChevronRight />
-        </div>
+          <div className="flex-center" onClick={() => handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)}>
+              <HiChevronLeft />
+          </div>
+          <div className="flex-center" onClick={() => handleClick(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1)}>
+              <HiChevronRight />
+          </div>
         </div>
     </>
   )
